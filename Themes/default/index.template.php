@@ -115,6 +115,9 @@ function template_html_above()
 			'integrate_pre_css_output', 'integrate_pre_javascript_output' for a single file.
 	*/
 
+	// Load in any custom <link> and <meta> elements
+	template_link_meta_custom();
+	
 	// load in any css from mods or themes so they can overwrite if wanted
 	template_css();
 

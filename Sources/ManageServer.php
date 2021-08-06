@@ -181,6 +181,8 @@ function ModifyGeneralSettings($return_config = false)
 		array('image_proxy_secret', $txt['image_proxy_secret'], 'file', 'text', 30, 'image_proxy_secret'),
 		array('image_proxy_maxsize', $txt['image_proxy_maxsize'], 'file', 'int', null, 'image_proxy_maxsize'),
 		'',
+		array('http_link_meta_custom', $txt['http_link_meta_custom'], 'db', 'large_text', 5, 'http_link_meta_custom'),
+		'',
 		array('enable_sm_stats', $txt['enable_sm_stats'], 'db', 'check', null, 'enable_sm_stats'),
 	);
 

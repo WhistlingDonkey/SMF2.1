@@ -7866,4 +7866,25 @@ function JavaScriptEscape($string)
 	)) . '\'';
 }
 
+/**
+ * Outputs a list of user set <link> and <meta> elements in the head of the document
+ * 	
+ */
+function template_link_meta_custom()
+{
+	global $modSettings;
+
+	if (!empty($modSettings['http_link_meta_custom']))
+	{
+		// http_custom_linkrel is newline seperated list
+		$custom_elements = preg_split('/\r\n|\r|\n/', $modSettings['http_link_meta_custom'], -1, PREG_SPLIT_NO_EMPTY);
+		foreach ($custom_elements as $element)
+		{
+	// tabbing to make output look neat in view-source
+	echo  '
+	' , $element;
+		}
+	}
+}
+
 ?>
