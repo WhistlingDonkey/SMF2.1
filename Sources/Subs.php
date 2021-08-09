@@ -7876,13 +7876,20 @@ function template_link_meta_custom()
 
 	if (!empty($modSettings['http_link_meta_custom']))
 	{
-		// http_custom_linkrel is newline seperated list
+		// http_link_meta_custom is a newline seperated list
 		$custom_elements = preg_split('/\r\n|\r|\n/', $modSettings['http_link_meta_custom'], -1, PREG_SPLIT_NO_EMPTY);
 		foreach ($custom_elements as $element)
 		{
+			// Strip out any erronous < and > and then add to ends
+			$element = preg_replace('/<|>/', '', $element);
+			$element = '<' . $element . '>';
+			
+	// Strip out <script, /script>, <style and /style> for security. This prevents succesfully injected scripts and styles in
+	// $http_link_meta_custom from running. It does not prevent their remnants from inclusion in the DOM build. Admins
+	// shouldn't be trying to add scripts and inline styles here, it's just for links and meta.
 	// tabbing to make output look neat in view-source
 	echo  '
-	' , $element;
+	' , preg_replace('/<script|\/script>|<style|\/style>/', '', $element);
 		}
 	}
 }
