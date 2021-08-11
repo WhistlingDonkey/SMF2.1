@@ -294,7 +294,7 @@ function template_create_index_progress()
 		<input type="hidden" name="bytes_per_word" value="', $context['index_settings']['bytes_per_word'], '">
 		<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '">
 	</form>
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var countdown = 10;
 		doAutoSubmit();
 

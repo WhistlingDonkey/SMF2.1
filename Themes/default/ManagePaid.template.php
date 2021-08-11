@@ -214,7 +214,7 @@ function template_modify_user_subscription()
 
 	// Some quickly stolen javascript from Post, could do with being more efficient :)
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 	</script>';
 
@@ -323,7 +323,7 @@ function template_modify_user_subscription()
 		</div><!-- .windowbg -->
 		<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '">
 	</form>
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oAddMemberSuggest = new smc_AutoSuggest({
 			sSelf: \'oAddMemberSuggest\',
 			sSessionId: smf_session_id,
@@ -546,8 +546,8 @@ function template_choose_payment()
 
 		if (!empty($gateway['javascript']))
 			echo '
-				<script>
-					', $gateway['javascript'], '
+				<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>'
+					, $gateway['javascript'], '
 				</script>';
 
 		foreach ($gateway['hidden'] as $name => $value)

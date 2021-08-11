@@ -140,7 +140,7 @@ function template_new_group()
 
 	if ($context['undefined_group'])
 		echo '
-			<script>
+			<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 				function swapPostGroup(isChecked)
 				{
 					var min_posts_text = document.getElementById(\'min_posts_text\');
@@ -356,7 +356,7 @@ function template_edit_group()
 			<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '">
 			<input type="hidden" name="', $context['admin-mmg_token_var'], '" value="', $context['admin-mmg_token'], '">
 		</form>
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oModeratorSuggest = new smc_AutoSuggest({
 			sSelf: \'oModeratorSuggest\',
 			sSessionId: smf_session_id,
@@ -385,7 +385,7 @@ function template_edit_group()
 
 	if ($context['group']['allow_post_group'])
 		echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		function swapPostGroup(isChecked)
 		{
 			var is_moderator_group = ', (int)$context['is_moderator_group'], ';
@@ -513,7 +513,7 @@ function template_add_edit_group_boards_list($collapse = true, $form_id = 'new_g
 									<input type="radio" name="select_all" id="deny_all" onclick="selectAllRadio(this, this.form, \'boardaccess\', \'deny\');"> <label for="deny_all">', $txt['board_perms_deny'], '</label>
 								</span>
 							</fieldset>
-							<script>
+							<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 								$(document).ready(function () {
 									$(".select_all_box").each(function () {
 										$(this).removeClass(\'select_all_box\');
@@ -524,7 +524,7 @@ function template_add_edit_group_boards_list($collapse = true, $form_id = 'new_g
 	if ($collapse)
 		echo '
 							<a href="javascript:void(0);" onclick="document.getElementById(\'visible_boards\').classList.remove(\'hidden\'); document.getElementById(\'visible_boards_link\').classList.add(\'hidden\'); return false;" id="visible_boards_link" class="hidden">[ ', $txt['membergroups_select_visible_boards'], ' ]</a>
-							<script>
+							<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 								document.getElementById("visible_boards_link").classList.remove(\'hidden\');
 								document.getElementById("visible_boards").classList.add(\'hidden\');
 							</script>';
@@ -691,7 +691,7 @@ function template_group_members()
 
 	if (!empty($context['group']['assignable']))
 		echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oAddMemberSuggest = new smc_AutoSuggest({
 			sSelf: \'oAddMemberSuggest\',
 			sSessionId: \'', $context['session_id'], '\',

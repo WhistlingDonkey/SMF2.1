@@ -132,7 +132,7 @@ function template_set_password()
 		<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '">
 		<input type="hidden" name="', $context['remind-sp_token_var'], '" value="', $context['remind-sp_token'], '">
 	</form>
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var regTextStrings = {
 			"password_short": "', $txt['registration_password_short'], '",
 			"password_reserved": "', $txt['registration_password_reserved'], '",
@@ -189,7 +189,7 @@ function template_ask()
 			</div><!-- .roundframe -->
 		</div><!-- .login -->
 	</form>
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var regTextStrings = {
 			"password_short": "', $txt['registration_password_short'], '",
 			"password_reserved": "', $txt['registration_password_reserved'], '",

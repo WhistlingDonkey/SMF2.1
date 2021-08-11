@@ -217,7 +217,7 @@ function template_main()
 			</tbody>
 		</table>
 	</div><!-- #statistics -->
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oStatsCenter = new smf_StatsCenter({
 			sTableId: \'stats\',
 

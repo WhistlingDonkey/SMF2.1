@@ -37,7 +37,7 @@ function template_newsfader()
 
 		echo '
 		</ul>
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			jQuery("#smf_slider").slippry({
 				pause: ', $settings['newsfader_time'], ',
 				adaptiveHeight: 0,
@@ -313,7 +313,7 @@ function template_info_center()
 
 	// Info center collapse object.
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oInfoCenterToggle = new smc_Toggle({
 			bToggleEnabled: true,
 			bCurrentlyCollapsed: ', empty($options['collapse_header_ic']) ? 'false' : 'true', ',

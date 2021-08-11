@@ -115,7 +115,7 @@ function template_email_members()
 
 	// This is some javascript for the simple/advanced toggling and member suggest
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oAdvancedPanelToggle = new smc_Toggle({
 			bToggleEnabled: true,
 			bCurrentlyCollapsed: true,
@@ -138,7 +138,7 @@ function template_email_members()
 			]
 		});
 	</script>
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oMemberSuggest = new smc_AutoSuggest({
 			sSelf: \'oMemberSuggest\',
 			sSessionId: smf_session_id,
@@ -251,7 +251,7 @@ function template_email_members_compose()
 			<input type="hidden" name="', $key, '" value="', implode(($key == 'emails' ? ';' : ','), $values), '">';
 
 	echo '
-			<script>';
+			<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 	// The functions used to preview a posts without loading a new page.
 	echo '
@@ -352,7 +352,7 @@ function template_email_members_compose()
 			</script>';
 
 	echo '
-			<script>
+			<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 				function checkboxes_status (item)
 				{
 					if (item.id == \'send_html\')
@@ -410,7 +410,7 @@ function template_email_members_send()
 			</div><!-- .windowbg -->
 		</form>
 
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var countdown = 2;
 		doAutoSubmit();
 

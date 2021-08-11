@@ -2178,7 +2178,7 @@ function parse_bbc($message, $smileys = true, $cache_id = '', $parse_tags = arra
 				),
 			),
 			'before' => '<pre data-e="{e}" data-t="{t}"><div>',
-			'after' => '</div><script>' . '$("head").append("<style>" + ' . JavaScriptEscape(base64_decode('cHJlW2RhdGEtZV1bZGF0YS10XXt3aGl0ZS1zcGFjZTpwcmUtd3JhcDtsaW5lLWhlaWdodDppbml0aWFsO31wcmVbZGF0YS1lXVtkYXRhLXRdID4gZGl2e2Rpc3BsYXk6dGFibGU7Ym9yZGVyOjFweCBzb2xpZDtib3JkZXItcmFkaXVzOjAuNWVtO3BhZGRpbmc6MWNoO21heC13aWR0aDo4MGNoO21pbi13aWR0aDoxMmNoO31wcmVbZGF0YS1lXVtkYXRhLXRdOjphZnRlcntkaXNwbGF5OmlubGluZS1ibG9jazttYXJnaW4tbGVmdDo4Y2g7bWluLXdpZHRoOjIwY2g7ZGlyZWN0aW9uOmx0cjtjb250ZW50OidcNUMgJycgJycgXl9fXlxBICcnIFw1QyAnJyAoJyBhdHRyKGRhdGEtZSkgJylcNUNfX19fX19fXEEgJycgJycgJycgKF9fKVw1QyAnJyAnJyAnJyAnJyAnJyAnJyAnJyApXDVDL1w1Q1xBICcnICcnICcnICcnICcgYXR0cihkYXRhLXQpICcgfHwtLS0tdyB8XEEgJycgJycgJycgJycgJycgJycgJycgfHwgJycgJycgJycgJycgfHwnO30=')) . ' + "</style>");' . '</script></pre>',
+			'after' => '</div><script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>' , '$("head").append("<style', !empty($context['httpSecurityNonce']) ? ' nonce=\"'. $context['httpSecurityNonce'] .'\">' : '>','" + ' . JavaScriptEscape(base64_decode('cHJlW2RhdGEtZV1bZGF0YS10XXt3aGl0ZS1zcGFjZTpwcmUtd3JhcDtsaW5lLWhlaWdodDppbml0aWFsO31wcmVbZGF0YS1lXVtkYXRhLXRdID4gZGl2e2Rpc3BsYXk6dGFibGU7Ym9yZGVyOjFweCBzb2xpZDtib3JkZXItcmFkaXVzOjAuNWVtO3BhZGRpbmc6MWNoO21heC13aWR0aDo4MGNoO21pbi13aWR0aDoxMmNoO31wcmVbZGF0YS1lXVtkYXRhLXRdOjphZnRlcntkaXNwbGF5OmlubGluZS1ibG9jazttYXJnaW4tbGVmdDo4Y2g7bWluLXdpZHRoOjIwY2g7ZGlyZWN0aW9uOmx0cjtjb250ZW50OidcNUMgJycgJycgXl9fXlxBICcnIFw1QyAnJyAoJyBhdHRyKGRhdGEtZSkgJylcNUNfX19fX19fXEEgJycgJycgJycgKF9fKVw1QyAnJyAnJyAnJyAnJyAnJyAnJyAnJyApXDVDL1w1Q1xBICcnICcnICcnICcnICcgYXR0cihkYXRhLXQpICcgfHwtLS0tdyB8XEEgJycgJycgJycgJycgJycgJycgJycgfHwgJycgJycgJycgJycgfHwnO30=')) . ' + "</style>");' . '</script></pre>',
 			'block_level' => true,
 		);
 
@@ -4314,7 +4314,7 @@ function template_javascript($do_deferred = false)
 	if (!empty($context['javascript_vars']) && !$do_deferred)
 	{
 		echo '
-	<script>';
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 		foreach ($context['javascript_vars'] as $key => $value)
 		{
@@ -4399,7 +4399,7 @@ function template_javascript($do_deferred = false)
 		if (!empty($context['javascript_inline']['defer']) && $do_deferred)
 		{
 			echo '
-<script>
+<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 window.addEventListener("DOMContentLoaded", function() {';
 
 			foreach ($context['javascript_inline']['defer'] as $js_code)
@@ -4413,7 +4413,7 @@ window.addEventListener("DOMContentLoaded", function() {';
 		if (!empty($context['javascript_inline']['standard']) && !$do_deferred)
 		{
 			echo '
-	<script>';
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 			foreach ($context['javascript_inline']['standard'] as $js_code)
 				echo $js_code;
@@ -4511,7 +4511,7 @@ function template_css()
 	if (!empty($context['css_header']))
 	{
 		echo '
-	<style>';
+	<style', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 		foreach ($context['css_header'] as $css)
 			echo $css . '

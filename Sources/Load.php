@@ -2015,7 +2015,7 @@ function loadTheme($id_theme = 0, $initialize = true)
 			foreach ($smcFunc['db_fetch_all']($result) as $row)
 			{
 				// There are just things we shouldn't be able to change as members.
-				if ($row['id_member'] != 0 && in_array($row['variable'], array('actual_theme_url', 'actual_images_url', 'base_theme_dir', 'base_theme_url', 'default_images_url', 'default_theme_dir', 'default_theme_url', 'default_template', 'images_url', 'number_recent_posts', 'smiley_sets_default', 'theme_dir', 'theme_id', 'theme_layers', 'theme_templates', 'theme_url')))
+				if ($row['id_member'] != 0 && in_array($row['variable'], array('actual_theme_url', 'actual_images_url', 'base_theme_dir', 'base_theme_url', 'default_images_url', 'default_theme_dir', 'default_theme_url', 'default_template', 'images_url', 'number_recent_posts', 'smiley_sets_default', 'theme_dir', 'theme_id', 'theme_layers', 'theme_templates', 'theme_url', 'theme_static_external')))
 					continue;
 
 				// If this is the theme_dir of the default theme, store it.
@@ -2708,7 +2708,7 @@ function loadSubTemplate($sub_template_name, $fatal = false)
  */
 function loadCSSFile($fileName, $params = array(), $id = '')
 {
-	global $settings, $context, $modSettings, $httpsec_sri_hashes, $theme_file_list, $httpSecurityNonce;
+	global $settings, $context, $modSettings, $httpsec_sri_hashes, $theme_file_list;
 
 	if (empty($context['css_files_order']))
 		$context['css_files_order'] = array();
@@ -2742,10 +2742,10 @@ function loadCSSFile($fileName, $params = array(), $id = '')
 	if (isset($modSettings['httpsec_nonce_applies']) && $modSettings['httpsec_nonce_applies'] === 'all')
 	{
 		// $params['attributes'] exists ?
-		if (!empty($params['attributes'])) $params['attributes'] = array_merge($params['attributes'], array('nonce' => $httpSecurityNonce));
+		if (!empty($params['attributes'])) $params['attributes'] = array_merge($params['attributes'], array('nonce' => $context['httpSecurityNonce']));
 			
 		// doesn't exist? no need to merge then
-		else 	$params['attributes'] = array('nonce' => $httpSecurityNonce);
+		else 	$params['attributes'] = array('nonce' => $context['httpSecurityNonce']);
 	}
 	
 	if (isset($settings['theme_static_external']) && $settings['theme_static_external'] == true) {
@@ -2874,7 +2874,7 @@ function addInlineCss($css)
  */
 function loadJavaScriptFile($fileName, $params = array(), $id = '')
 {
-	global $settings, $context, $modSettings, $httpsec_sri_hashes, $theme_file_list, $httpSecurityNonce;
+	global $settings, $context, $modSettings, $httpsec_sri_hashes, $theme_file_list;
 
 	$params['seed'] = (!array_key_exists('seed', $params) || (array_key_exists('seed', $params) && $params['seed'] === true)) ?
 		(array_key_exists('browser_cache', $context) ? $context['browser_cache'] : '') :
@@ -2906,10 +2906,10 @@ function loadJavaScriptFile($fileName, $params = array(), $id = '')
 	if (isset($modSettings['httpsec_nonce_applies']) && $modSettings['httpsec_nonce_applies'] === 'all')
 	{
 		// $params['attributes'] exists ?
-		if (!empty($params['attributes'])) $params['attributes'] = array_merge($params['attributes'], array('nonce' => $httpSecurityNonce));
+		if (!empty($params['attributes'])) $params['attributes'] = array_merge($params['attributes'], array('nonce' => $context['httpSecurityNonce']));
 			
 		// doesn't exist? no need to merge then
-		else 	$params['attributes'] = array('nonce' => $httpSecurityNonce);
+		else 	$params['attributes'] = array('nonce' => $context['httpSecurityNonce']);
 	}
 	
 	if (isset($settings['theme_static_external']) && $settings['theme_static_external'] == true) {

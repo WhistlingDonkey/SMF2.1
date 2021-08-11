@@ -1730,7 +1730,7 @@ function ssi_pollVote()
 		echo '<!DOCTYPE html>
 <html>
 <head>
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		history.go(-1);
 	</script>
 </head>

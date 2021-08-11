@@ -71,7 +71,7 @@ function template_group_requests_block()
 			</ul>
 		</div><!-- #group_requests_panel -->
 
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var oGroupRequestsPanelToggle = new smc_Toggle({
 				bToggleEnabled: true,
 				bCurrentlyCollapsed: ', !empty($context['admin_prefs']['mcgr']) ? 'true' : 'false', ',
@@ -138,7 +138,7 @@ function template_watched_users()
 			</ul>
 		</div><!-- #watched_users_panel -->
 
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var oWatchedUsersToggle = new smc_Toggle({
 				bToggleEnabled: true,
 				bCurrentlyCollapsed: ', !empty($context['admin_prefs']['mcwu']) ? 'true' : 'false', ',
@@ -205,7 +205,7 @@ function template_reported_posts_block()
 			</ul>
 		</div><!-- #reported_posts_panel -->
 
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var oWatchedUsersToggle = new smc_Toggle({
 				bToggleEnabled: true,
 				bCurrentlyCollapsed: ', !empty($context['admin_prefs']['mcrp']) ? 'true' : 'false', ',
@@ -272,7 +272,7 @@ function template_reported_users_block()
 			</ul>
 		</div><!-- #reported_users_panel -->
 
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var oWatchedUsersToggle = new smc_Toggle({
 				bToggleEnabled: true,
 				bCurrentlyCollapsed: ', !empty($context['admin_prefs']['mcur']) ? 'true' : 'false', ',
@@ -631,7 +631,7 @@ function template_warn_template()
 		</form>
 	</div><!-- #modcenter -->
 
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		$(document).ready(function() {
 			$("#preview_button").click(function() {
 				return ajax_getTemplatePreview();

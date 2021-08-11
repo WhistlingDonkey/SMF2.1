@@ -920,7 +920,7 @@ function template_bcd()
 			</tr>
 		</table>
 
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var icons = new Object();';
 
 	foreach ($context['clockicons'] as $t => $v)
@@ -1024,7 +1024,7 @@ function template_hms()
 		</table>';
 
 	echo '
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var icons = new Object();';
 
 	foreach ($context['clockicons'] as $t => $v)
@@ -1114,7 +1114,7 @@ function template_omfg()
 
 	echo '
 		</table>
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var icons = new Object();';
 
 	foreach ($context['clockicons'] as $t => $v)

@@ -19,7 +19,7 @@ function template_main()
 
 	// Start the javascript... and boy is there a lot.
 	echo '
-		<script>';
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 	// When using Go Back due to fatal_error, allow the form to be re-submitted with changes.
 	if (isBrowser('is_firefox'))
@@ -514,7 +514,7 @@ function template_main()
 		</form>';
 
 	echo '
-		<script>';
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 	$newPostsHTML = '
 		<span id="new_replies"></span>
@@ -676,7 +676,7 @@ function template_main()
 
 		echo '
 		</div><!-- #recent -->
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var aIgnoreToggles = new Array();';
 
 		foreach ($ignored_posts as $post_id)
@@ -755,14 +755,14 @@ function template_spellcheck()
 	// As you may expect - we need a lot of javascript for this... load it from the separate files.
 	echo '
 		</style>
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var spell_formname = window.opener.spell_formname;
 			var spell_fieldname = window.opener.spell_fieldname;
 		</script>
 		<script src="', $settings['default_theme_url'], '/scripts/spellcheck.js', $context['browser_cache'], '"></script>
 		<script src="', $settings['default_theme_url'], '/scripts/script.js', $context['browser_cache'], '"></script>
-		<script>
-			', $context['spell_js'], '
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>'
+			, $context['spell_js'], '
 		</script>
 	</head>
 	<body onload="nextWord(false);">
@@ -809,7 +809,7 @@ function template_quotefast()
 	<body>
 		', $txt['retrieving_quote'], '
 		<div id="temporary_posting_area" style="display: none;"></div>
-		<script>';
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 	if ($context['close_window'])
 		echo '
@@ -927,7 +927,7 @@ function template_announcement_send()
 		</form>
 	</div><!-- #announcement -->
 	<br>
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var countdown = 2;
 		doAutoSubmit();
 

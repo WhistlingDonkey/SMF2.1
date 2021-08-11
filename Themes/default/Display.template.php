@@ -326,7 +326,7 @@ function template_main()
 		</div>';
 
 	echo '
-		<script>';
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 	if (!empty($options['display_quick_mod']) && $options['display_quick_mod'] == 1 && $context['can_remove_post'])
 	{
@@ -987,7 +987,7 @@ function template_quickreply()
 
 	echo '
 						', template_control_richedit($context['post_box_name'], 'smileyBox_message', 'bbcBox_message'), '
-						<script>
+						<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 							function insertQuoteFast(messageid)
 							{
 								var e = document.getElementById("', $context['post_box_name'], '");
@@ -1020,7 +1020,7 @@ function template_quickreply()
 	// Draft autosave available and the user has it enabled?
 	if (!empty($context['drafts_autosave']))
 		echo '
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var oDraftAutoSave = new smf_DraftAutoSave({
 				sSelf: \'oDraftAutoSave\',
 				sLastNote: \'draft_lastautosave\',
@@ -1039,7 +1039,7 @@ function template_quickreply()
 		</form>';
 
 	echo '
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var oQuickReply = new QuickReply({
 				bDefaultCollapsed: false,
 				iTopicId: ', $context['current_topic'], ',

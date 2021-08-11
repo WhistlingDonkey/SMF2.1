@@ -153,7 +153,7 @@ function template_select()
 			</div>
 		</form>
 	</div><!-- #split_topics -->
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var start = new Array();
 		start[0] = ', $context['not_selected']['start'], ';
 		start[1] = ', $context['selected']['start'], ';

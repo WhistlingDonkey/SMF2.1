@@ -19,7 +19,7 @@ function template_main()
 
 	// Some javascript for adding more options.
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var pollOptionNum = 0;
 		var pollOptionId = ', $context['last_choice_id'], ';
 

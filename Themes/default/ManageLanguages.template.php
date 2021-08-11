@@ -294,7 +294,7 @@ function template_modify_language_entries()
 				<span class="add_lang_entry_button" style="display: none;">
 					<a class="button" href="javascript:void(0);" onclick="add_lang_entry(\'', $group, '\'); return false;">' . $txt['editnews_clickadd'] . '</a>
 				</span>
-				<script>
+				<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 					entry_num = ', $entry_num, ';
 				</script>';
 			}

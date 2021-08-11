@@ -355,7 +355,7 @@ function ModifyMailSettings($return_config = false)
 	prepareDBSettingContext($config_vars);
 
 	$context['settings_insert_above'] = '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var bDay = {';
 
 	$i = 0;

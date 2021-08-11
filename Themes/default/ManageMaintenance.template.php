@@ -167,7 +167,7 @@ function template_maintain_members()
 	global $context, $settings, $txt, $scripturl;
 
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var warningMessage = \'\';
 		var membersSwap = false;
 
@@ -311,7 +311,7 @@ function template_maintain_members()
 		</div>
 	</div><!-- #manage_maintenance -->
 
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oAttributeMemberSuggest = new smc_AutoSuggest({
 			sSelf: \'oAttributeMemberSuggest\',
 			sSessionId: smf_session_id,
@@ -341,7 +341,7 @@ function template_maintain_topics()
 
 	// Bit of javascript for showing which boards to prune in an otherwise hidden list.
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var rotSwap = false;
 		function swapRot()
 		{

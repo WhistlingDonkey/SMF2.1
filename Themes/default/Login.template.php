@@ -85,7 +85,7 @@ function template_login()
 	echo '
 					<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '">
 					<input type="hidden" name="', $context['login_token_var'], '" value="', $context['login_token'], '">
-					<script>
+					<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 						setTimeout(function() {
 							document.getElementById("', !empty($context['from_ajax']) ? 'ajax_' : '', isset($context['default_username']) && $context['default_username'] != '' ? 'loginpass' : 'loginuser', '").focus();
 						}, 150);';
@@ -203,7 +203,7 @@ function template_login_tfa()
 						</div>
 					</div>
 				</form>
-				<script>
+				<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 					form = $("#frmTfa");';
 
 	if (!empty($context['from_ajax']))
@@ -301,7 +301,7 @@ function template_kick_guest()
 
 	// Do the focus thing...
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		document.forms.frmLogin.user.focus();
 	</script>';
 }
@@ -393,7 +393,7 @@ function template_admin_login()
 
 	// Focus on the password box.
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		document.forms.frmLogin.', $context['sessionCheckType'], '_pass.focus();
 	</script>';
 }

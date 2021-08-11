@@ -164,8 +164,8 @@ function template_show_list($list_id = null)
 
 	if (isset($cur_list['javascript']))
 		echo '
-	<script>
-		', $cur_list['javascript'], '
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>'
+		, $cur_list['javascript'], '
 	</script>';
 }
 

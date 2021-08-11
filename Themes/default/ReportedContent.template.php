@@ -121,7 +121,7 @@ function template_reported_posts_block()
 			</div><!-- .modbox -->
 		</div><!-- #reported_posts_panel -->
 
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var oReportedPostsPanelToggle = new smc_Toggle({
 				bToggleEnabled: true,
 				bCurrentlyCollapsed: ', !empty($context['admin_prefs']['mcrp']) ? 'true' : 'false', ',
@@ -335,7 +335,7 @@ function template_reported_members_block()
 			</div><!-- .modbox -->
 		</div><!-- #reported_users_panel -->
 
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var oReportedPostsPanelToggle = new smc_Toggle({
 				bToggleEnabled: true,
 				bCurrentlyCollapsed: ', !empty($context['admin_prefs']['mcrm']) ? 'true' : 'false', ',

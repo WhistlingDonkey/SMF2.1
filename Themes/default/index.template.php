@@ -235,7 +235,7 @@ function template_body_above()
 		echo '
 				<li id="nojs_logout">
 					<a href="', $scripturl, '?action=logout;', $context['session_var'], '=', $context['session_id'], '">', $txt['logout'], '</a>
-					<script>document.getElementById("nojs_logout").style.display = "none";</script>
+					<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','document.getElementById("nojs_logout").style.display = "none";</script>
 				</li>';
 
 		// And now we're done.

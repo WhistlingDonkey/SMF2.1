@@ -362,7 +362,7 @@ function template_view_package()
 
 	// Toggle options.
 	echo '
-	<script>';
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 	// Operations.
 	if (!empty($js_operations))
@@ -433,7 +433,7 @@ function template_extract_package()
 		echo '
 			', $context['redirect_text'], '<br><br>
 			<a href="', $context['redirect_url'], '">', $txt['package_installed_redirect_go_now'], '</a><span id="countdown" class="hidden"> (5) </span> | <a href="', $scripturl, '?action=admin;area=packages;sa=browse">', $txt['package_installed_redirect_cancel'], '</a>
-			<script>
+			<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 				var countdown = ', $context['redirect_timeout'], ';
 				var el = document.getElementById(\'countdown\');
 				var loop = setInterval(doCountdown, 1000);
@@ -554,7 +554,7 @@ function template_browse()
 				', $txt['packages_adding'], '
 			</div>
 
-			<script>
+			<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 				window.smfForum_scripturl = smf_scripturl;
 				window.smfForum_sessionid = smf_session_id;
 				window.smfForum_sessionvar = smf_session_var;';
@@ -572,7 +572,7 @@ function template_browse()
 
 	// This sets the announcements and current versions themselves ;).
 	echo '
-			<script>
+			<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 				var oAdminIndex = new smf_AdminIndex({
 					sSelf: \'oAdminCenter\',
 					bLoadAnnouncements: false,
@@ -651,7 +651,7 @@ function template_browse()
 			<input type="hidden" name="area" value="packages">
 			<input type="hidden" name="sa" value="browse">
 		</form>
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oAdvancedPanelToggle = new smc_Toggle({
 			bToggleEnabled: true,
 			bCurrentlyCollapsed: true,
@@ -990,7 +990,7 @@ function template_package_list()
 		$section_count = count($context['package_list']);
 
 		echo '
-	<script>';
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 		foreach ($context['package_list'] as $section => $ps)
 		{
@@ -1219,13 +1219,13 @@ function template_control_chmod()
 	// Hide the details of the list.
 	if (empty($context['package_ftp']['form_elements_only']))
 		echo '
-				<script>
+				<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 					document.getElementById(\'need_writable_list\').style.display = \'none\';
 				</script>';
 
 	// Quick generate the test button.
 	echo '
-				<script>
+				<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 					// Generate a "test ftp" button.
 					var generatedButton = false;
 					function generateFTPTest()
@@ -1281,7 +1281,7 @@ function template_control_chmod()
 
 	// Make sure the button gets generated last.
 	$context['insert_after_template'] .= '
-				<script>
+				<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 					generateFTPTest();
 				</script>';
 }
@@ -1345,7 +1345,7 @@ function template_file_permissions()
 
 	// This will handle expanding the selection.
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oRadioValues = {
 			0: "read",
 			1: "writable",
@@ -1750,7 +1750,7 @@ function template_permission_show_contents($ident, $contents, $level, $has_more 
 
 		if ($level > 1 && !$isFound)
 			echo '
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			expandFolder(\'', $js_ident, '\', \'\');
 		</script>';
 	}
@@ -1847,7 +1847,7 @@ function template_action_permissions()
 
 	// Just the countdown stuff
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var countdown = ', $countDown, ';
 		doAutoSubmit();
 

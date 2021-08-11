@@ -52,7 +52,7 @@ function template_find_members()
 		<meta name="robots" content="noindex">
 		<link rel="stylesheet" href="', $settings['theme_url'], '/css/index', $context['theme_variant'], '.css', $context['browser_cache'], '">
 		<script src="', $settings['default_theme_url'], '/scripts/script.js', $context['browser_cache'], '"></script>
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var membersAdded = [];
 			function addMember(name)
 			{
@@ -136,7 +136,7 @@ function template_find_members()
 
 	if (empty($context['results']))
 		echo '
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			document.getElementById("search").focus();
 		</script>';
 

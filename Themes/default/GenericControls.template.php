@@ -33,7 +33,7 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 		<textarea class="editor" name="', $editor_id, '" id="', $editor_id, '" cols="600" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onchange="storeCaret(this);" tabindex="', $context['tabindex']++, '" style="width: ', $editor_context['width'], '; height: ', $editor_context['height'], ';', isset($context['post_error']['no_message']) || isset($context['post_error']['long_message']) ? 'border: 1px solid red;' : '', '"', !empty($context['editor']['required']) ? ' required' : '', '>', $editor_context['value'], '</textarea>
 		<div id="', $editor_id, '_resizer" class="richedit_resize"></div>
 		<input type="hidden" name="', $editor_id, '_mode" id="', $editor_id, '_mode" value="0">
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			$(document).ready(function() {
 				', !empty($context['bbcodes_handlers']) ? $context['bbcodes_handlers'] : '', '
 
@@ -130,7 +130,7 @@ function template_control_richedit_buttons($editor_id)
 			<span id="draft_lastautosave" ></span>
 		</span>
 		<script src="', $settings['default_theme_url'], '/scripts/drafts.js', $context['browser_cache'], '"></script>
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var oDraftAutoSave = new smf_DraftAutoSave({
 				sSelf: \'oDraftAutoSave\',
 				sLastNote: \'draft_lastautosave\',
@@ -151,7 +151,7 @@ function template_control_richedit_buttons($editor_id)
 			<span id="draft_lastautosave" ></span>
 		</span>
 		<script src="', $settings['default_theme_url'], '/scripts/drafts.js', $context['browser_cache'], '"></script>
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var oDraftAutoSave = new smf_DraftAutoSave({
 				sSelf: \'oDraftAutoSave\',
 				sLastNote: \'draft_lastautosave\',

@@ -105,7 +105,7 @@ function template_main()
 					<input type="number" name="maxage" id="maxage" value="', empty($context['search_params']['maxage']) ? '9999' : $context['search_params']['maxage'], '" size="5" maxlength="4"> ', $txt['days_word'], '
 				</dd>
 			</dl>
-			<script>
+			<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 				createEventListener(window);
 				window.addEventListener("load", initSearch, false);
 			</script>
@@ -180,7 +180,7 @@ function template_main()
 		</fieldset>';
 
 		echo '
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var oAdvancedPanelToggle = new smc_Toggle({
 				bToggleEnabled: true,
 				bCurrentlyCollapsed: ', $context['boards_check_all'] ? 'true' : 'false', ',
@@ -207,7 +207,7 @@ function template_main()
 
 	echo '
 	</form>
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oAddMemberSuggest = new smc_AutoSuggest({
 			sSelf: \'oAddMemberSuggest\',
 			sSessionId: smf_session_id,
@@ -478,7 +478,7 @@ function template_results()
 	echo '
 	<br class="clear">
 	<div class="smalltext righttext" id="search_jump_to"></div>
-	<script>';
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 	if (!empty($options['display_quick_mod']) && $options['display_quick_mod'] == 1 && !empty($context['topics']) && $context['can_move'])
 		echo '

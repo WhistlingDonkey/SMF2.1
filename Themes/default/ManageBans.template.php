@@ -193,7 +193,7 @@ function template_ban_edit()
 
 	echo '
 	</div><!-- #manage_bans -->
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var fUpdateStatus = function ()
 		{
 			document.getElementById("expire_date").disabled = !document.getElementById("expires_one_day").checked;
@@ -306,7 +306,7 @@ function template_ban_edit_trigger()
 			<input type="hidden" name="', $context['admin-bet_token_var'], '" value="', $context['admin-bet_token'], '">
 		</form>
 	</div><!-- #manage_bans -->
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oAddMemberSuggest = new smc_AutoSuggest({
 			sSelf: \'oAddMemberSuggest\',
 			sSessionId: smf_session_id,

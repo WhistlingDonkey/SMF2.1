@@ -105,7 +105,7 @@ function template_folder()
 
 	// The every helpful javascript!
 	echo '
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var allLabels = {};
 			var currentLabels = {};
 			function loadLabelChoices()
@@ -652,7 +652,7 @@ function template_subject_list()
 		echo '
 			<tr class="windowbg', $message['is_unread'] ? ' unread_pm' : '', '">
 				<td class="table_icon pm_icon">
-					<script>
+					<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 						currentLabels[', $message['id'], '] = {';
 
 		if (!empty($message['labels']))
@@ -758,7 +758,7 @@ function template_search()
 				</dt>
 				<dd>
 					<input type="search" name="search"', !empty($context['search_params']['search']) ? ' value="' . $context['search_params']['search'] . '"' : '', ' size="40">
-					<script>
+					<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 						createEventListener(window);
 						window.addEventListener("load", initSearch, false);
 					</script>
@@ -853,7 +853,7 @@ function template_search()
 
 		// Some javascript for the advanced toggling
 		echo '
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var oAdvancedPanelToggle = new smc_Toggle({
 				bToggleEnabled: true,
 				bCurrentlyCollapsed: true,
@@ -1124,7 +1124,7 @@ function template_send()
 		</form>';
 
 	echo '
-		<script>';
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 	// The functions used to preview a personal message without loading a new page.
 	echo '
@@ -1269,7 +1269,7 @@ function template_send()
 		<br class="clear">';
 
 	echo '
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var oPersonalMessageSend = new smf_PersonalMessageSend({
 				sSelf: \'oPersonalMessageSend\',
 				sSessionId: smf_session_id,
@@ -1601,7 +1601,7 @@ function template_add_rule()
 	global $context, $txt, $scripturl;
 
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var criteriaNum = 0;
 		var actionNum = 0;
 		var groups = new Array()
@@ -1880,7 +1880,7 @@ function template_add_rule()
 
 	// Now setup all the bits!
 	echo '
-	<script>';
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 	foreach ($context['rule']['criteria'] as $k => $c)
 		echo '

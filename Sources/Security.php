@@ -1462,7 +1462,7 @@ function FindCorsBaseUrl($url, $sub_domain = false)
  */
 function httpSecurityHeaders()
 {
-	global $modSettings, $httpSecurityNonce;
+	global $modSettings, $context;
 	
 	
 	if (isset($modSettings['httpsec_nonce']) && $modSettings['httpsec_nonce'] !== 'disable')	
@@ -1471,7 +1471,7 @@ function httpSecurityHeaders()
 		
 	if (!empty($modSettings['httpsec_content-security-policy']) && isset($modSettings['httpsec_nonce']) && $modSettings['httpsec_nonce'] !== 'disable')
 	{
-		$httpsec_csp_with_nonce = preg_replace('/'.$modSettings['httpsec_csp_nonce_pattern'].'/', $httpSecurityNonce, $modSettings['httpsec_content-security-policy']);
+		$httpsec_csp_with_nonce = preg_replace('/'.$modSettings['httpsec_csp_nonce_pattern'].'/', $context['httpSecurityNonce'], $modSettings['httpsec_content-security-policy']);
 		header('Content-Security-Policy: ' . $httpsec_csp_with_nonce);
 	}
 	elseif (!empty($modSettings['httpsec_content-security-policy']))
@@ -1548,10 +1548,10 @@ function loadSRIHashes() {
  */
 function createNonce() {
 
-global $modSettings, $httpSecurityNonce;
+global $modSettings, $context;
 
 	if ($modSettings['httpsec_nonce'] == 'use_server')
-			$httpSecurityNonce = $_SERVER[$modSettings['httpsec_server_nonce_param']];
+			$context['httpSecurityNonce'] = $_SERVER[$modSettings['httpsec_server_nonce_param']];
 	
 	else {
 		
@@ -1561,7 +1561,7 @@ global $modSettings, $httpSecurityNonce;
 		
 		// PHP version > 7.0.0 we can use random_bytes to generate the cryptgraphically secure nonce
 		if (PHP_VERSION_ID  > 70000)
-			$httpSecurityNonce = base64_encode(random_bytes(16));
+			$context['httpSecurityNonce'] = base64_encode(random_bytes(16));
 
 		// PHP < 7.0.0 we have to use a different way
 		else
@@ -1569,7 +1569,7 @@ global $modSettings, $httpSecurityNonce;
 			for ($i = 1; $i <= 16; $i++) {
 				$bytes = openssl_random_pseudo_bytes($i, $cstrong);
 				}
-			$httpSecurityNonce  = base64_encode(bin2hex($bytes));
+			$context['httpSecurityNonce']  = base64_encode(bin2hex($bytes));
 		}
 }
 

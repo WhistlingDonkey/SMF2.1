@@ -229,7 +229,7 @@ function template_admin_browse()
 			<div class="cat_bar">
 				<h3 class="catbg">', $txt['admin_browse_outstanding'], '</h3>
 			</div>
-			<script>
+			<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 				function onOutstandingSubmit()
 				{
 					if (document.forms.postFormOutstanding.todo.value == "")

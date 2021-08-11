@@ -332,7 +332,7 @@ function template_main()
 
 	if (!empty($context['can_quick_mod']) && $options['display_quick_mod'] == 1 && !empty($context['topics']) && $context['can_move'])
 		echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		if (typeof(window.XMLHttpRequest) != "undefined")
 			aJumpTo[aJumpTo.length] = new JumpTo({
 				sContainerId: "quick_mod_jump_to",
@@ -353,7 +353,7 @@ function template_main()
 
 	// Javascript for inline editing.
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oQuickModifyTopic = new QuickModifyTopic({
 			aHidePrefixes: Array("lockicon", "stickyicon", "pages", "newicon"),
 			bMouseOnDiv: false,
@@ -534,7 +534,7 @@ function template_topic_legend()
 
 	if (!empty($context['jump_to']))
 		echo '
-			<script>
+			<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 				if (typeof(window.XMLHttpRequest) != "undefined")
 					aJumpTo[aJumpTo.length] = new JumpTo({
 						sContainerId: "message_index_jump_to",

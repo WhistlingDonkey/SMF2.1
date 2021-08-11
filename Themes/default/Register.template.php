@@ -67,7 +67,7 @@ function template_registration_form()
 	global $context, $scripturl, $txt, $modSettings;
 
 	echo '
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			function verifyAgree()
 			{
 				if (currentAuthMethod == \'passwd\' && document.forms.registration.smf_autov_pwmain.value != document.forms.registration.smf_autov_pwverify.value)
@@ -321,7 +321,7 @@ function template_registration_form()
 			<input type="hidden" name="', $context['register_token_var'], '" value="', $context['register_token'], '">
 			<input type="hidden" name="step" value="2">
 		</form>
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var regTextStrings = {
 				"username_valid": "', $txt['registration_username_available'], '",
 				"username_invalid": "', $txt['registration_username_unavailable'], '",
@@ -653,7 +653,7 @@ function template_edit_agreement()
 					<input type="hidden" name="agree_lang" value="', $context['current_agreement'], '">
 					<input type="hidden" name="sa" value="agreement">
 					<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '">
-					<script>
+					<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 						function resetAgreementConfirm()
 						{
 							return true;
@@ -773,7 +773,7 @@ function template_edit_privacy_policy()
 					<input type="hidden" name="sa" value="policy" />
 					<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 					<input type="hidden" name="', $context['admin-regp_token_var'], '" value="', $context['admin-regp_token'], '" />
-					<script>
+					<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 						function resetPolicyConfirm()
 						{
 							return true;

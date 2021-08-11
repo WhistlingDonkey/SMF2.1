@@ -58,7 +58,7 @@ function template_main()
 	echo '
 						</div>
 						<a href="javascript:void(0);" onclick="document.getElementById(\'known_themes_list\').classList.remove(\'hidden\'); document.getElementById(\'known_themes_link\').classList.add(\'hidden\'); return false; " id="known_themes_link" class="hidden">[ ', $txt['themeadmin_themelist_link'], ' ]</a>
-						<script>
+						<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 							document.getElementById("known_themes_list").classList.add(\'hidden\');
 							document.getElementById("known_themes_link").classList.remove(\'hidden\');
 						</script>
@@ -167,7 +167,7 @@ function template_main()
 		</div><!-- #admin_form_wrapper -->';
 
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		window.smfForum_scripturl = smf_scripturl;
 		window.smfForum_sessionid = smf_session_id;
 		window.smfForum_sessionvar = smf_session_var;
@@ -679,7 +679,7 @@ function template_set_settings()
 	if (!empty($context['theme_variants']))
 	{
 		echo '
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oThumbnails = {';
 
 		// All the variant thumbnails.
@@ -944,7 +944,7 @@ function template_edit_style()
 
 	// From now on no one can complain that editing css is difficult. If you disagree, go to www.w3schools.com.
 	echo '
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			var previewData = "";
 			var previewTimeout;
 			var editFilename = ', JavaScriptEscape($context['edit_filename']), ';

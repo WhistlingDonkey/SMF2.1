@@ -36,7 +36,7 @@ function template_generic_menu_dropdown_above()
 				</div>
 		</div>
 	</div>
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		$( ".mobile_generic_menu_', $context['cur_menu_id'], '" ).click(function() {
 			$( "#mobile_generic_menu_', $context['cur_menu_id'], '" ).show();
 			});

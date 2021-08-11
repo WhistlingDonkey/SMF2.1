@@ -20,7 +20,7 @@ function template_profile_above()
 	// Prevent Chrome from auto completing fields when viewing/editing other members profiles
 	if (isBrowser('is_chrome') && !$context['user']['is_owner'])
 		echo '
-			<script>
+			<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 				disableAutoComplete();
 			</script>';
 
@@ -121,7 +121,7 @@ function template_alerts_popup()
 
 	echo '
 		</div><!-- .alerts_unread -->
-		<script>
+		<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 			function markAlertsRead(obj) {
 				ajax_indicator(true);
 				$.get(
@@ -829,7 +829,7 @@ function template_editBuddies()
 	echo '
 		<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '">
 	</form>
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oAddBuddySuggest = new smc_AutoSuggest({
 			sSelf: \'oAddBuddySuggest\',
 			sSessionId: smf_session_id,
@@ -942,7 +942,7 @@ function template_editIgnoreList()
 	echo '
 		<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '">
 	</form>
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		var oAddIgnoreSuggest = new smc_AutoSuggest({
 			sSelf: \'oAddIgnoreSuggest\',
 			sSessionId: \'', $context['session_id'], '\',
@@ -2162,7 +2162,7 @@ function template_groupMembership()
 
 		// Javascript for the selector stuff.
 		echo '
-				<script>
+				<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 					var prevClass = "";
 					var prevDiv = "";
 					function highlightSelected(box)
@@ -2333,7 +2333,7 @@ function template_issueWarning()
 	template_load_warning_variables();
 
 	echo '
-	<script>
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 		// Disable notification boxes as required.
 		function modifyWarnNotify()
 		{
@@ -2496,7 +2496,7 @@ function template_issueWarning()
 	template_show_list('view_warnings');
 
 	echo '
-	<script>';
+	<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>';
 
 	if (!$context['user']['is_owner'])
 		echo '
@@ -2762,7 +2762,7 @@ function template_profile_group_manage()
 	echo '
 								</span>
 								<a href="javascript:void(0);" onclick="document.getElementById(\'additional_groupsList\').style.display = \'block\'; document.getElementById(\'additional_groupsLink\').style.display = \'none\'; return false;" id="additional_groupsLink" style="display: none;" class="toggle_down">', $txt['additional_membergroups_show'], '</a>
-								<script>
+								<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 									document.getElementById("additional_groupsList").style.display = "none";
 									document.getElementById("additional_groupsLink").style.display = "";
 								</script>
@@ -2841,7 +2841,7 @@ function template_profile_signature_modify()
 
 	// Some javascript used to count how many characters have been used so far in the signature.
 	echo '
-								<script>
+								<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 									var maxLength = ', $context['signature_limits']['max_length'], ';
 
 									$(document).ready(function() {
@@ -2928,7 +2928,7 @@ function template_profile_avatar_select()
 									<div class="edit_avatar_img">
 										<img id="avatar" src="', $context['member']['avatar']['choice'] == 'server_stored' ? $context['member']['avatar']['href'] : $modSettings['avatar_url'] . '/blank.png', '" alt="">
 									</div>
-									<script>
+									<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 										var files = ["' . implode('", "', $context['avatar_list']) . '"];
 										var avatar = document.getElementById("avatar");
 										var cat = document.getElementById("cat");
@@ -2991,7 +2991,7 @@ function template_profile_avatar_select()
 	}
 
 	echo '
-								<script>
+								<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 									', !empty($context['member']['avatar']['allow_server_stored']) ? 'document.getElementById("avatar_server_stored").style.display = "' . ($context['member']['avatar']['choice'] == 'server_stored' ? '' : 'none') . '";' : '', '
 									', !empty($context['member']['avatar']['allow_external']) ? 'document.getElementById("avatar_external").style.display = "' . ($context['member']['avatar']['choice'] == 'external' ? '' : 'none') . '";' : '', '
 									', !empty($context['member']['avatar']['allow_upload']) ? 'document.getElementById("avatar_upload").style.display = "' . ($context['member']['avatar']['choice'] == 'upload' ? '' : 'none') . '";' : '', '

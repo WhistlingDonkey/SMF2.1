@@ -2045,7 +2045,7 @@ function create_control_verification(&$verificationOptions, $do_test = false)
 	// Add javascript for the object.
 	if ($context['controls']['verification'][$verificationOptions['id']]['show_visual'])
 		$context['insert_after_template'] .= '
-			<script>
+			<script'. !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>'.'
 				var verification' . $verificationOptions['id'] . 'Handle = new smfCaptcha("' . $thisVerification['image_href'] . '", "' . $verificationOptions['id'] . '", ' . ($context['use_graphic_library'] ? 1 : 0) . ');
 			</script>';
 
