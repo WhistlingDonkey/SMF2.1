@@ -1317,34 +1317,6 @@ else
 }
 
 /**
- * This sets the X-Frame-Options header.
- *
- * @param string $override An option to override (either 'SAMEORIGIN' or 'DENY')
- * @since 2.1
- */
-function frameOptionsHeader($override = null)
-{
-	global $modSettings;
-
-	$option = 'SAMEORIGIN';
-	if (is_null($override) && !empty($modSettings['frame_security']))
-		$option = $modSettings['frame_security'];
-	elseif (in_array($override, array('SAMEORIGIN', 'DENY')))
-		$option = $override;
-
-	// Don't bother setting the header if we have disabled it.
-	if ($option == 'DISABLE')
-		return;
-
-	// Finally set it.
-	header('x-frame-options: ' . $option);
-
-	// And some other useful ones.
-	header('x-xss-protection: 1');
-	header('x-content-type-options: nosniff');
-}
-
-/**
  * This sets the Access-Control-Allow-Origin header.
  * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
  *
@@ -1481,6 +1453,124 @@ function FindCorsBaseUrl($url, $sub_domain = false)
 	*/
 
 	return $base_domain;
+}
+
+/**
+ * This sets the HTTP headers.
+ *
+ * @since 2.?
+ */
+function httpSecurityHeaders()
+{
+	global $modSettings, $httpSecurityNonce;
+	
+	
+	if (isset($modSettings['httpsec_nonce']) && $modSettings['httpsec_nonce'] !== 'disable')	
+		createNonce();
+		
+		
+	if (!empty($modSettings['httpsec_content-security-policy']) && isset($modSettings['httpsec_nonce']) && $modSettings['httpsec_nonce'] !== 'disable')
+	{
+		$httpsec_csp_with_nonce = preg_replace('/'.$modSettings['httpsec_csp_nonce_pattern'].'/', $httpSecurityNonce, $modSettings['httpsec_content-security-policy']);
+		header('Content-Security-Policy: ' . $httpsec_csp_with_nonce);
+	}
+	elseif (!empty($modSettings['httpsec_content-security-policy']))
+		header('Content-Security-Policy: ' . $modSettings['httpsec_content-security-policy']);	
+		
+	if (isset($modSettings['httpsec_x-frame-options']) && $modSettings['httpsec_x-frame-options'] != 'disable')
+		header('X-Frame-Options: ' . $modSettings['httpsec_x-frame-options']);
+	
+	if (isset($modSettings['httpsec_x-content-type-options']) && $modSettings['httpsec_x-content-type-options'] == 'nosniff')
+		header('X-Content-Type-Options: nosniff');
+
+	 if (isset($modSettings['httpsec_strict-transport-security']) && $modSettings['httpsec_strict-transport-security'] == 'enable')
+		header('Strict-Transport-Security: max-age=' . (isset($modSettings['httpsec_hsts_max-age']) ? $modSettings['httpsec_hsts_max-age'].';' :'0;' )
+		. (isset($modSettings['httpsec_hsts_include_subdomains'])  && $modSettings['httpsec_hsts_include_subdomains'] == true ? ' includeSubdomains;':'')
+		. (isset($modSettings['httpsec_hsts_enable_preload'])  && $modSettings['httpsec_hsts_enable_preload'] == true ? ' preload;':''));
+	 		
+	if (isset($modSettings['httpsec_referer-policy']) && $modSettings['httpsec_referrer-policy'] != 'disable')
+		header('Referrer-Policy: ' . $modSettings['httpsec_referrer-policy']);
+	
+	if (isset($modSettings['httpsec_Cross-Origin-Embedder-Policy']) && $modSettings['httpsec_Cross-Origin-Embedder-Policy'] != 'disable')
+		header('Cross-Origin-Embedder-Policy: ' . $modSettings['httpsec_Cross-Origin-Embedder-Policy']);
+	
+	if (isset($modSettings['httpsec_Cross-Origin-Opener-Policy']) && $modSettings['httpsec_Cross-Origin-Opener-Policy'] != 'disable')
+		header('Cross-Origin-Opener-Policy: ' . $modSettings['httpsec_Cross-Origin-Opener-Policy']);
+	
+	if (isset($modSettings['httpsec_Cross-Origin-Resource-Policy']) && $modSettings['httpsec_Cross-Origin-Resource-Policy'] != 'disable')
+		header('Cross-Origin-Resource-Policy: ' . $modSettings['httpsec_Cross-Origin-Resource-Policy']);
+	
+	if (!empty($modSettings['httpsec_custom_headers']))
+	{
+		$httpsec_custom_headers = preg_split('/\r\n|\r|\n/', $modSettings['httpsec_custom_headers'], -1, PREG_SPLIT_NO_EMPTY);
+		foreach ($httpsec_custom_headers as $header)
+		{
+			header($header);
+		}
+	}
+	
+}
+
+/**
+ * This gets the SRI hashes
+ *
+ * @since 2.?
+ */
+function loadSRIHashes() {
+
+	global $httpsec_sri_hashes, $boarddir, $settings, $theme_file_list;
+
+	// First get the main SRI hases
+	if (file_exists($boarddir .'/CoreSRI.Hashes.php')) {
+		include ($boarddir .'/CoreSRI.Hashes.php');
+		foreach ($core_sri_hashes as $row => $value) $httpsec_sri_hashes[$row] = $value;
+	}
+	
+	// Get the default theme SRI hashes
+	if (file_exists($settings['default_theme_dir'] .'/ThemeSRI.Hashes.php')) {
+		include ($settings['default_theme_dir'] .'/ThemeSRI.Hashes.php');
+		foreach ($theme_default_sri as $row => $value) $httpsec_sri_hashes[$row] = $value;
+	}
+	
+	// Get theme SRI hashes if not default theme
+	if ($settings['theme_dir'] !== $settings['default_theme_dir']) {
+		if (file_exists($settings['theme_dir'] .'/ThemeSRI.Hashes.php')) {
+			include ($settings['theme_dir'] .'/ThemeSRI.Hashes.php');
+			foreach ($theme_sri as $row => $value) $httpsec_sri_hashes[$row] = $value;
+		}
+	}
+}
+
+/**
+ * This makes the nonce used for inline scripts and inline styles (CSP2.0) and external scripts (CSP3.0)
+ *
+ * @since 2.?
+ */
+function createNonce() {
+
+global $modSettings, $httpSecurityNonce;
+
+	if ($modSettings['httpsec_nonce'] == 'use_server')
+			$httpSecurityNonce = $_SERVER[$modSettings['httpsec_server_nonce_param']];
+	
+	else {
+		
+		// We require PHP 5.2.7 or better;
+		if (!defined('PHP_VERSION_ID'))
+			define('PHP_VERSION_ID', (PHP_MAJOR_VERSION * 10000 + PHP_MINOR_VERSION * 100 + PHP_RELEASE_VERSION));
+		
+		// PHP version > 7.0.0 we can use random_bytes to generate the cryptgraphically secure nonce
+		if (PHP_VERSION_ID  > 70000)
+			$httpSecurityNonce = base64_encode(random_bytes(16));
+
+		// PHP < 7.0.0 we have to use a different way
+		else
+			$bytes = null;
+			for ($i = 1; $i <= 16; $i++) {
+				$bytes = openssl_random_pseudo_bytes($i, $cstrong);
+				}
+			$httpSecurityNonce  = base64_encode(bin2hex($bytes));
+		}
 }
 
 ?>

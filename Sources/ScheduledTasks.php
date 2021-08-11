@@ -24,7 +24,7 @@ function AutoTask()
 	global $smcFunc;
 
 	// We bail out of index.php too early for these to be called.
-	frameOptionsHeader();
+	httpSecurityHeaders();
 	corsPolicyHeader();
 
 	// Requests from a CORS response may send a options to find if the requst is valid.  Simply bail out here, the cors header have been sent already.

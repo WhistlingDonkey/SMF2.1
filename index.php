@@ -208,7 +208,7 @@ function smf_main()
 	}
 
 	// We should set our security headers now.
-	frameOptionsHeader();
+	httpSecurityHeaders();
 
 	// Set our CORS policy.
 	corsPolicyHeader();

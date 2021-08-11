@@ -1521,6 +1521,7 @@ function SetJavaScript()
 		'theme_templates',
 		'theme_url',
 		'name',
+		'theme_static_external',
 	);
 
 	// Can't change reserved vars.

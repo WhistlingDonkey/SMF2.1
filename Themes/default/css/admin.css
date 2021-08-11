@@ -285,6 +285,9 @@ fieldset.admin_group .inactive {
 .large_admin_menu_icon.warning::before {
 	background-position: -5px -215px;
 }
+.large_admin_menu_icon.hacker::before {
+	background-position: -47px -215px;
+}
 
 /* Styles for the support and credits page.
 /* Hey, people might actually want to put their names on it now!

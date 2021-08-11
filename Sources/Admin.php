@@ -368,11 +368,22 @@ function AdminMain()
 						'general' => array($txt['general_settings']),
 						'database' => array($txt['database_settings']),
 						'cookie' => array($txt['cookies_sessions_settings']),
-						'security' => array($txt['security_settings']),
 						'cache' => array($txt['caching_settings']),
 						'export' => array($txt['export_settings']),
 						'loads' => array($txt['load_balancing_settings']),
 						'phpinfo' => array($txt['phpinfo_settings']),
+					),
+				),
+				'securitysettings' => array(
+					'label' => $txt['admin_security_settings'],
+					'file' => 'ManageSecurity.php',
+					'function' => 'ModifySecurity',
+					'icon' => 'hacker',
+					'subsections' => array(
+						'securityforum' => array($txt['security_settings']),
+						'securityheaders' => array($txt['httpsec_headers_settings']),
+						'securitysri' => array($txt['httpsec_sri_settings']),
+						'securitycors' => array($txt['httpsec_cors_settings']),
 					),
 				),
 				'maintain' => array(

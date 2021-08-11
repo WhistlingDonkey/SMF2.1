@@ -799,6 +799,9 @@ function Logout($internal = false, $redirect = true)
 	}
 
 	session_destroy();
+	
+	// Destroy any cookies, cache, storage or execution we've been asked to destroy
+	if (!empty($modSettings['httpsec_clear-site-data'])) header('Clear-Site-Data: ' . $modSettings['httpsec_clear-site-data']);
 
 	// Off to the merry board index we go!
 	if ($redirect)

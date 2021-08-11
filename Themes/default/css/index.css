@@ -127,6 +127,9 @@ input[type="number"][size="5"] {
 input[type="number"][size="6"] {
 	width: calc(6ch + 15px + 0.8em);
 }
+input[type="number"][size="10"] {
+	width: calc(10ch + 15px + 0.8em);
+}
 select option {
 	padding: 0 4px;
 }
@@ -1958,7 +1961,7 @@ tr.windowbg td, tr.bg td, .table_grid tr td {
 .main_icons.attachment::before {
 	background-position: -187px -187px;
 }
-.main_icons.lock::before, .main_icons.security::before {
+.main_icons.lock::before, .main_icons.security::before, .main_icons.hacker::before {
 	background-position: -213px -187px;
 }
 .main_icons.error::before, .main_icons.disable::before {

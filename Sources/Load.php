@@ -2064,6 +2064,8 @@ function loadTheme($id_theme = 0, $initialize = true)
 			$settings['template_dirs'][] = $settings['default_theme_dir'];
 	}
 
+	loadSRIHashes();
+	
 	if (!$initialize)
 		return;
 
@@ -2706,7 +2708,7 @@ function loadSubTemplate($sub_template_name, $fatal = false)
  */
 function loadCSSFile($fileName, $params = array(), $id = '')
 {
-	global $settings, $context, $modSettings;
+	global $settings, $context, $modSettings, $httpsec_sri_hashes, $theme_file_list, $httpSecurityNonce;
 
 	if (empty($context['css_files_order']))
 		$context['css_files_order'] = array();
@@ -2721,6 +2723,35 @@ function loadCSSFile($fileName, $params = array(), $id = '')
 	$params['validate'] = isset($params['validate']) ? $params['validate'] : true;
 	$params['order_pos'] = isset($params['order_pos']) ? (int) $params['order_pos'] : 3000;
 	$params['attributes'] = isset($params['attributes']) ? $params['attributes'] : array();
+	
+	// Load SRI for scripts and css (if any)
+	if (isset($httpsec_sri_hashes) && array_key_exists($fileName, $httpsec_sri_hashes)) {
+	
+		// We don't want to overwrite SRI if it has already been set
+		if ((!empty($params['attributes']) && !array_key_exists('integrity', $params['attributes'])) || empty($params['attributes']))
+		{
+			// $params['attributes'] exists ?
+			if (!empty($params['attributes'])) $params['attributes'] = array_merge($params['attributes'], array('integrity' => $httpsec_sri_hashes[$fileName][0], 'crossorigin' => $httpsec_sri_hashes[$fileName][1]));
+			
+			// doesn't exist? no need to merge then
+			else 	$params['attributes'] = array('integrity' => $httpsec_sri_hashes[$fileName][0], 'crossorigin' => $httpsec_sri_hashes[$fileName][1]);
+		}
+	}
+	
+	// Adds nonce to external css
+	if (isset($modSettings['httpsec_nonce_applies']) && $modSettings['httpsec_nonce_applies'] === 'all')
+	{
+		// $params['attributes'] exists ?
+		if (!empty($params['attributes'])) $params['attributes'] = array_merge($params['attributes'], array('nonce' => $httpSecurityNonce));
+			
+		// doesn't exist? no need to merge then
+		else 	$params['attributes'] = array('nonce' => $httpSecurityNonce);
+	}
+	
+	if (isset($settings['theme_static_external']) && $settings['theme_static_external'] == true) {
+		$params['external'] = true;
+		$params['seed'] = false;
+	}
 	
 	// Account for shorthand like admin.css?alp21 filenames
 	$id = (empty($id) ? strtr(str_replace('.css', '', basename($fileName)), '?', '_') : $id) . '_css';
@@ -2755,8 +2786,26 @@ function loadCSSFile($fileName, $params = array(), $id = '')
 	// An external file doesn't have a filepath. Mock one for simplicity.
 	else
 	{
-		$fileUrl = $fileName;
-		$filePath = $fileName;
+		// Testing
+		// If $fileName has no url, add it
+		if (parse_url($fileName, PHP_URL_SCHEME) === null)
+		{
+		
+			if (!empty($theme_file_list) && in_array($fileName, $theme_file_list)) {
+				$fileUrl = $settings[$themeRef . '_url'] . '/css/' . $fileName;
+				$filePath = $settings[$themeRef . '_url'] . '/css/' . $fileName;
+			}
+			else {
+				$fileUrl = $settings['default_theme_url'] . '/css/' . $fileName;
+				$filePath = $settings['default_theme_url'] . '/css/' . $fileName;
+			}
+		}
+		
+		// Else all good to go
+		else {
+			$fileUrl = $fileName;
+			$filePath = $fileName;
+		}
 
 		// Always turn these off for external files.
 		$params['minimize'] = false;
@@ -2825,7 +2874,7 @@ function addInlineCss($css)
  */
 function loadJavaScriptFile($fileName, $params = array(), $id = '')
 {
-	global $settings, $context, $modSettings;
+	global $settings, $context, $modSettings, $httpsec_sri_hashes, $theme_file_list, $httpSecurityNonce;
 
 	$params['seed'] = (!array_key_exists('seed', $params) || (array_key_exists('seed', $params) && $params['seed'] === true)) ?
 		(array_key_exists('browser_cache', $context) ? $context['browser_cache'] : '') :
@@ -2839,6 +2888,35 @@ function loadJavaScriptFile($fileName, $params = array(), $id = '')
 	$params['validate'] = isset($params['validate']) ? $params['validate'] : true;
 	$params['attributes'] = isset($params['attributes']) ? $params['attributes'] : array();
 
+	// Load SRI for scripts and css (if any)
+	if (isset($httpsec_sri_hashes) && array_key_exists($fileName, $httpsec_sri_hashes)) {
+	
+		// We don't want to overwrite SRI if it has already been set
+		if ((!empty($params['attributes']) && !array_key_exists('integrity', $params['attributes'])) || empty($params['attributes']))
+		{
+			// $params['attributes'] exists ?
+			if (!empty($params['attributes'])) $params['attributes'] = array_merge($params['attributes'], array('integrity' => $httpsec_sri_hashes[$fileName][0], 'crossorigin' => $httpsec_sri_hashes[$fileName][1]));
+			
+			// doesn't exist? no need to merge then
+			else 	$params['attributes'] = array('integrity' => $httpsec_sri_hashes[$fileName][0], 'crossorigin' => $httpsec_sri_hashes[$fileName][1]);
+		}
+	}
+	
+	// Adds nonce to external script
+	if (isset($modSettings['httpsec_nonce_applies']) && $modSettings['httpsec_nonce_applies'] === 'all')
+	{
+		// $params['attributes'] exists ?
+		if (!empty($params['attributes'])) $params['attributes'] = array_merge($params['attributes'], array('nonce' => $httpSecurityNonce));
+			
+		// doesn't exist? no need to merge then
+		else 	$params['attributes'] = array('nonce' => $httpSecurityNonce);
+	}
+	
+	if (isset($settings['theme_static_external']) && $settings['theme_static_external'] == true) {
+		$params['external'] = true;
+		$params['seed'] = false;
+	}
+	
 	// Account for shorthand like admin.js?alp21 filenames
 	$id = (empty($id) ? strtr(str_replace('.js', '', basename($fileName)), '?', '_') : $id) . '_js';
 	$fileName = str_replace(pathinfo($fileName, PATHINFO_EXTENSION), strtok(pathinfo($fileName, PATHINFO_EXTENSION), '?'), $fileName);
@@ -2871,8 +2949,26 @@ function loadJavaScriptFile($fileName, $params = array(), $id = '')
 	// An external file doesn't have a filepath. Mock one for simplicity.
 	else
 	{
-		$fileUrl = $fileName;
-		$filePath = $fileName;
+		// Testing
+		// If $fileName has no url, add it
+		if (parse_url($fileName, PHP_URL_SCHEME) === null)
+		{
+		
+			if (!empty($theme_file_list) && in_array($fileName, $theme_file_list)) {
+				$fileUrl = $settings[$themeRef . '_url'] . '/scripts/' . $fileName;
+				$filePath = $settings[$themeRef . '_url'] . '/scripts/' . $fileName;
+			}
+			else {
+				$fileUrl = $settings['default_theme_url'] . '/scripts/' . $fileName;
+				$filePath = $settings['default_theme_url'] . '/scripts/' . $fileName;
+			}
+		}
+		
+		// Else all good to go
+		else {
+			$fileUrl = $fileName;
+			$filePath = $fileName;
+		}
 
 		// Always turn these off for external files.
 		$params['minimize'] = false;

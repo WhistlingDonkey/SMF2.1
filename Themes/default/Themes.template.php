@@ -514,6 +514,13 @@ function template_set_settings()
 					<dd>
 						<input type="text" id="theme_dir" name="options[theme_dir]" value="', $context['theme_settings']['actual_theme_dir'], '" size="50">
 					</dd>
+					<dt>
+						<label for="theme_static_external">', $txt['theme_static_external'], '</label>
+					</dt>
+					<dd>
+						<input type="hidden" name="options[theme_static_external]" value="0">
+						<input type="checkbox" id="theme_static_external" name="options[theme_static_external]" value="1"', !empty($context['theme_settings']['theme_static_external']) ? ' checked' : '', ' >
+					</dd>
 				</dl>';
 
 	// Do we allow theme variants?

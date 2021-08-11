@@ -437,4 +437,73 @@ $txt['export_min_diskspace_pct'] = 'Pause exports if free space on disk is less 
 $txt['export_rate'] = 'Rate at which to process posts & personal messages for export';
 $txt['export_rate_desc'] = 'Higher values will compile exports more quickly, but could affect forum performance.';
 
+$txt['httpsec_sri_core_desc'] = 'Subresource Integrity (SRI) is a security feature that enables browsers to verify that resources they fetch (for example, from a CDN or other external server), are delivered without unexpected manipulation. You can set SRI for core scripts here and they will be used automatically. For theme scripts and css you will need to edit the ThemeSRI.Hashes.php file in the Theme directory.';
+
+$txt['httpsec_headers_desc'] = 'These HTTP response headers can help with the prevention of various cross site scripting (XSS) and cross site request forgery (CSRF) attacks. These response headers, especially a strong Content Security Policy are your main defence against a successful XSS or CSRF attack compromising your users. You can set these HTTP response headers in your servers configuration or if you are unable to or choose not to you can set the HTTP response headers here.
+<br><br><strong>Note:</strong> If you host multiple websites on your server the other websites will not get the benefit of the headers you set here.';
+
+$txt['httpsec_x-frame-options'] = 'X-Frame-Options';
+$txt['httpsec_x-frame-options_sameorigin'] = 'Allow Same Origin';
+$txt['httpsec_x-frame-options_deny'] = 'Deny all frames';
+$txt['httpsec_x-frame-options_disable'] = 'Disabled';
+
+$txt['httpsec_x-content-type-options'] = 'X-Content-Type-Options';
+$txt['httpsec_x-content-type-options_disable'] = 'Disabled';
+$txt['httpsec_x-content-type-options_nosniff'] = 'nosniff';
+
+$txt['httpsec_referrer-policy'] = 'Referrer Policy';
+$txt['httpsec_referrer-policy_disable'] = 'Disabled';
+$txt['httpsec_referrer-policy_no-referrer'] = 'No referrer';
+$txt['httpsec_referrer-policy_no-referrer-when-downgrade'] = 'No referrer when downgrade';
+$txt['httpsec_referrer-policy_origin'] = 'Origin';
+$txt['httpsec_referrer-policy_origin-when-cross-origin'] = 'Origin when cross origin';
+$txt['httpsec_referrer-policy_same-origin'] = 'Same origin';
+$txt['httpsec_referrer-policy_strict-origin'] = 'Strict origin';
+$txt['httpsec_referrer-policy_strict-origin-when-cross-origin'] = 'Strict origin when cross origin';
+
+$txt['httpsec_strict-transport-security'] = 'HTTP Strict Transport Security';
+$txt['httpsec_strict-transport-security_disable'] = 'Disabled';
+$txt['httpsec_strict-transport-security_enable'] = 'Enabled';
+$txt['httpsec_hsts_include_subdomains'] = 'Include subdomains';
+$txt['httpsec_hsts_enable_preload'] = 'Enable preload';
+$txt['httpsec_hsts_max-age'] = 'Max-age';
+
+$txt['httpsec_cross-origin-embedder-policy'] = 'Cross-Origin-Embedder-Policy';
+$txt['httpsec_coep_disable'] = 'Disabled';
+$txt['httpsec_coep_unsafe-none'] = 'Unsafe-None';
+$txt['httpsec_coep_require-corp'] = 'Require-Corp';
+
+$txt['httpsec_cross-origin-opener-policy'] = 'Cross-Origin-Opener-Policy';
+$txt['httpsec_coop_disable'] = 'Disabled';
+$txt['httpsec_coop_unsafe-none'] = 'Unsafe-None';
+$txt['httpsec_coop_same-origin'] = 'Same-Origin';
+$txt['httpsec_coop_soap'] = 'Same-Origin-Allow_Popups ';
+
+$txt['httpsec_cross-origin-resource-policy'] = 'Cross-Origin-Resource-Policy';
+$txt['httpsec_corp_disable'] = 'Disabled';
+$txt['httpsec_corp_same-site'] = 'Same-Site';
+$txt['httpsec_corp_same-origin'] = 'Same-Origin';
+$txt['httpsec_corp_cross-origin'] = 'Cross-Origin';
+
+$txt['httpsec_content-security-policy'] = 'Content Security Policy';
+
+$txt['httpsec_clear-site-data'] = 'Clear-Site-Data';
+
+$txt['httpsec_nonce'] = 'Use nonce for scripts/styles';
+$txt['httpsec_nonce_disable'] = 'Disabled';
+$txt['httpsec_nonce_php'] = 'Forum generated';
+$txt['httpsec_nonce_server'] = 'Server generated';
+$txt['httpsec_nonce_applies'] = 'Apply nonce to';
+$txt['httpsec_nonce_inline'] = 'Inline scripts and styles only';
+$txt['httpsec_nonce_all'] = 'All scripts and styles';
+$txt['httpsec_csp_nonce_pattern'] = 'Nonce pattern in Content Security Policy';
+$txt['httpsec_server_nonce_param'] = 'Server parameter passed as the nonce';
+
+$txt['httpsec_custom_headers'] = 'Custom response headers';
+
+$txt['httpsec_jquery_sri_hash'] = 'jQuery SRI Hash';
+$txt['httpsec_jquery_sri_auth'] = 'jQuery SRI Cross Origin mode';
+$txt['httpsec_jquery_auth_anonymous'] = 'Anonymous';
+$txt['httpsec_jquery_auth_credential'] = 'Use Credentials';
+
 ?>

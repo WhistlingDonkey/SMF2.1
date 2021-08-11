@@ -7632,7 +7632,7 @@ function send_http_status($code, $status = '')
 
 	// Typically during these requests, we have cleaned the response (ob_*clean), ensure these headers exist.
 	require_once($sourcedir . '/Security.php');
-	frameOptionsHeader();
+	httpSecurityHeaders();
 	corsPolicyHeader();
 
 	if (!isset($statuses[$code]) && empty($status))

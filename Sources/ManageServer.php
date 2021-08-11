@@ -100,7 +100,6 @@ function ModifySettings()
 		'general' => 'ModifyGeneralSettings',
 		'database' => 'ModifyDatabaseSettings',
 		'cookie' => 'ModifyCookieSettings',
-		'security' => 'ModifyGeneralSecuritySettings',
 		'cache' => 'ModifyCacheSettings',
 		'export' => 'ModifyExportSettings',
 		'loads' => 'ModifyLoadBalancingSettings',
@@ -585,102 +584,6 @@ function ModifyCookieSettings($return_config = false)
 
 	// Fill the config array.
 	prepareServerSettingsContext($config_vars);
-}
-
-/**
- * Settings really associated with general security aspects.
- *
- * @param bool $return_config Whether or not to return the config_vars array (used for admin search)
- * @return void|array Returns nothing or returns the $config_vars array if $return_config is true
- */
-function ModifyGeneralSecuritySettings($return_config = false)
-{
-	global $txt, $scripturl, $context;
-
-	$config_vars = array(
-		array('int', 'failed_login_threshold'),
-		array('int', 'loginHistoryDays', 'subtext' => $txt['zero_to_disable']),
-		'',
-
-		array('check', 'securityDisable'),
-		array('check', 'securityDisable_moderate'),
-		'',
-
-		// Reactive on email, and approve on delete
-		array('check', 'send_validation_onChange'),
-		array('check', 'approveAccountDeletion'),
-		'',
-
-		// Password strength.
-		array(
-			'select',
-			'password_strength',
-			array(
-				$txt['setting_password_strength_low'],
-				$txt['setting_password_strength_medium'],
-				$txt['setting_password_strength_high']
-			)
-		),
-		array('check', 'enable_password_conversion'),
-		'',
-
-		// Reporting of personal messages?
-		array('check', 'enableReportPM'),
-		'',
-
-		array('check', 'allow_cors'),
-		array('check', 'allow_cors_credentials'),
-		array('text', 'cors_domains'),
-		array('text', 'cors_headers'),
-		'',
-
-		array(
-			'select',
-			'frame_security',
-			array(
-				'SAMEORIGIN' => $txt['setting_frame_security_SAMEORIGIN'],
-				'DENY' => $txt['setting_frame_security_DENY'],
-				'DISABLE' => $txt['setting_frame_security_DISABLE']
-			)
-		),
-		'',
-
-		array(
-			'select',
-			'proxy_ip_header',
-			array(
-				'disabled' => $txt['setting_proxy_ip_header_disabled'],
-				'autodetect' => $txt['setting_proxy_ip_header_autodetect'],
-				'HTTP_X_FORWARDED_FOR' => 'X-Forwarded-For',
-				'HTTP_CLIENT_IP' => 'Client-IP',
-				'HTTP_X_REAL_IP' => 'X-Real-IP',
-				'HTTP_CF_CONNECTING_IP' => 'CF-Connecting-IP'
-			)
-		),
-		array('text', 'proxy_ip_servers'),
-	);
-
-	call_integration_hook('integrate_general_security_settings', array(&$config_vars));
-
-	if ($return_config)
-		return $config_vars;
-
-	// Saving?
-	if (isset($_GET['save']))
-	{
-		saveDBSettings($config_vars);
-		$_SESSION['adm-save'] = true;
-
-		call_integration_hook('integrate_save_general_security_settings');
-
-		writeLog();
-		redirectexit('action=admin;area=serversettings;sa=security;' . $context['session_var'] . '=' . $context['session_id']);
-	}
-
-	$context['post_url'] = $scripturl . '?action=admin;area=serversettings;save;sa=security';
-	$context['settings_title'] = $txt['security_settings'];
-
-	prepareDBSettingContext($config_vars);
 }
 
 /**

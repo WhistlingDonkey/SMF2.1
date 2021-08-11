@@ -751,4 +751,10 @@ $txt['notify_announcements_desc'] = 'Enabling this default option violates the r
 
 $txt['enable_sm_stats'] = 'Allow Stat Collection';
 
+$txt['admin_security_settings'] = 'Security Settings';
+$txt['admin_secure_settings'] = 'This page allows you to change security settings for your forum. Be very careful with these settings, as they may render the forum dysfunctional.';
+$txt['httpsec_headers_settings'] = 'HTTP Response Headers';
+$txt['httpsec_cors_settings'] = 'Cross Origin Resource Sharing';
+$txt['httpsec_sri_settings'] = 'Subresource Integrity';
+
 ?>
