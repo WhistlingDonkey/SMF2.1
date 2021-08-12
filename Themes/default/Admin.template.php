@@ -100,8 +100,8 @@ function template_admin()
 	// The below functions include all the scripts needed from the simplemachines.org site. The language and format are passed for internationalization.
 	if (empty($modSettings['disable_smf_js']))
 		echo '
-					<script src="', $scripturl, '?action=viewsmfile;filename=current-version.js"></script>
-					<script src="', $scripturl, '?action=viewsmfile;filename=latest-news.js"></script>';
+					<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'"' : '',' src="', $scripturl, '?action=viewsmfile;filename=current-version.js"></script>
+					<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'"' : '',' src="', $scripturl, '?action=viewsmfile;filename=latest-news.js"></script>';
 
 	// This sets the announcements and current versions themselves ;).
 	echo '
@@ -259,8 +259,8 @@ function template_credits()
 	// Now we just have to include the script and wait ;).
 	echo '
 					</script>
-					<script src="', $scripturl, '?action=viewsmfile;filename=current-version.js"></script>
-					<script src="', $scripturl, '?action=viewsmfile;filename=latest-news.js"></script>';
+					<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'"' : '',' src="', $scripturl, '?action=viewsmfile;filename=current-version.js"></script>
+					<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'"' : '', ' src="', $scripturl, '?action=viewsmfile;filename=latest-news.js"></script>';
 
 	// This sets the latest support stuff.
 	echo '
@@ -539,7 +539,7 @@ function template_view_versions()
 	   red. It also contains the function, swapOption, that toggles showing the detailed information for each of the
 	   file categories. (sources, languages, and templates.) */
 	echo '
-					<script src="', $scripturl, '?action=viewsmfile;filename=detailed-version.js"></script>
+					<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'"' : '', ' src="', $scripturl, '?action=viewsmfile;filename=detailed-version.js"></script>
 					<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>','
 						var oViewVersions = new smf_ViewVersions({
 							aKnownLanguages: [

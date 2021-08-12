@@ -568,7 +568,7 @@ function template_browse()
 
 	if (empty($modSettings['disable_smf_js']))
 		echo '
-			<script src="', $scripturl, '?action=viewsmfile;filename=latest-news.js"></script>';
+			<script', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'"' : '', ' src="', $scripturl, '?action=viewsmfile;filename=latest-news.js"></script>';
 
 	// This sets the announcements and current versions themselves ;).
 	echo '
