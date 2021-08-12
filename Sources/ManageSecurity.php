@@ -225,7 +225,7 @@ function ModifyGeneralSecuritySettings($return_config = false)
 		redirectexit('action=admin;area=serversettings;sa=security;' . $context['session_var'] . '=' . $context['session_id']);
 	}
 
-	$context['post_url'] = $scripturl . '?action=admin;area=serversettings;save;sa=security';
+	$context['post_url'] = $scripturl . '?action=admin;area=securitysettings;save;sa=security';
 	$context['settings_title'] = $txt['security_settings'];
 
 	prepareDBSettingContext($config_vars);

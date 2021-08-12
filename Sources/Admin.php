@@ -703,7 +703,7 @@ function AdminSearchInternal()
 	// All the files we need to include.
 	$include_files = array(
 		'ManageSettings', 'ManageBoards', 'ManageNews', 'ManageAttachments', 'ManageCalendar', 'ManageMail', 'ManagePaid', 'ManagePermissions',
-		'ManagePosts', 'ManageRegistration', 'ManageSearch', 'ManageSearchEngines', 'ManageServer', 'ManageSmileys', 'ManageLanguages',
+		'ManagePosts', 'ManageRegistration', 'ManageSearch', 'ManageSearchEngines', 'ManageServer', 'ManageSmileys', 'ManageLanguages', 'ManageSecurity',
 	);
 
 	// This is a special array of functions that contain setting data - we query all these to simply pull all setting bits!
@@ -740,6 +740,9 @@ function AdminSearchInternal()
 		array('ManageSearchEngineSettings', 'area=sengines;sa=settings'),
 		array('ModifySubscriptionSettings', 'area=paidsubscribe;sa=settings'),
 		array('ModifyLogSettings', 'area=logs;sa=settings'),
+		array('ModifyHTTPSecurityHeadersSettings', 'area=securitysettings;sa=security'),
+		array('ModifyHTTPSecurityCORSSettings', 'area=securitysettings;sa=security'),
+		array('ModifyHTTPSecuritySRISettings', 'area=securitysettings;sa=security'),
 	);
 
 	call_integration_hook('integrate_admin_search', array(&$language_files, &$include_files, &$settings_search));
