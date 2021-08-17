@@ -7614,6 +7614,8 @@ function check_cron()
  */
 function send_http_status($code, $status = '')
 {
+	global $sourcedir;
+
 	$statuses = array(
 		204 => 'No Content',
 		206 => 'Partial Content',
@@ -7629,6 +7631,7 @@ function send_http_status($code, $status = '')
 	$protocol = preg_match('~^\s*(HTTP/[12]\.\d)\s*$~i', $_SERVER['SERVER_PROTOCOL'], $matches) ? $matches[1] : 'HTTP/1.0';
 
 	// Typically during these requests, we have cleaned the response (ob_*clean), ensure these headers exist.
+	require_once($sourcedir . '/Security.php');
 	frameOptionsHeader();
 	corsPolicyHeader();
 
@@ -7866,6 +7869,27 @@ function JavaScriptEscape($string)
 	)) . '\'';
 }
 
+function tokenTxtReplace($stringSubject = '')
+{
+	global $txt;
+
+	if (empty($stringSubject))
+		return '';
+
+	$translatable_tokens = preg_match_all('/{(.*?)}/' , $stringSubject, $matches);
+	$toFind = array();
+	$replaceWith = array();
+
+	if (!empty($matches[1]))
+		foreach ($matches[1] as $token) {
+			$toFind[] = '{' . $token . '}';
+			$replaceWith[] = isset($txt[$token]) ? $txt[$token] : $token;
+		}
+
+	return str_replace($toFind, $replaceWith, $stringSubject);
+
+}
+
 /**
  * Outputs a list of user set <link> and <meta> elements in the head of the document
  * 	
@@ -7893,5 +7917,6 @@ function template_link_meta_custom()
 		}
 	}
 }
+
 
 ?>

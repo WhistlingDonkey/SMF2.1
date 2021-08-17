@@ -179,9 +179,10 @@ function ModifyBasicSettings($return_config = false)
 			'select',
 			'jquery_source',
 			array(
-				'auto' => $txt['jquery_auto'],
+				'cdn' => $txt['jquery_google_cdn'],
+				'jquery_cdn' => $txt['jquery_jquery_cdn'],
+				'microsoft_cdn' => $txt['jquery_microsoft_cdn'],
 				'local' => $txt['jquery_local'],
-				'cdn' => $txt['jquery_cdn'],
 				'custom' => $txt['jquery_custom']
 			),
 			'onchange' => 'if (this.value == \'custom\'){document.getElementById(\'jquery_custom\').disabled = false; } else {document.getElementById(\'jquery_custom\').disabled = true;}'
@@ -189,7 +190,7 @@ function ModifyBasicSettings($return_config = false)
 		array(
 			'text',
 			'jquery_custom',
-			'disabled' => isset($modSettings['jquery_source']) && $modSettings['jquery_source'] != 'custom', 'size' => 75
+			'disabled' => !isset($modSettings['jquery_source']) || (isset($modSettings['jquery_source']) && $modSettings['jquery_source'] != 'custom'), 'size' => 75
 		),
 		'',
 
@@ -1600,7 +1601,14 @@ function ShowCustomProfiles()
 				'data' => array(
 					'function' => function($rowData) use ($scripturl)
 					{
-						return sprintf('<a href="%1$s?action=admin;area=featuresettings;sa=profileedit;fid=%2$d">%3$s</a><div class="smalltext">%4$s</div>', $scripturl, $rowData['id_field'], $rowData['field_name'], $rowData['field_desc']);
+						$field_name = tokenTxtReplace($rowData['field_name']);
+						$field_desc = tokenTxtReplace($rowData['field_desc']);
+
+						return sprintf('<a href="%1$s?action=admin;area=featuresettings;sa=profileedit;fid=%2$d">%3$s</a><div class="smalltext">%4$s</div>',
+							$scripturl,
+							$rowData['id_field'],
+							$field_name,
+							$field_desc);
 					},
 					'style' => 'width: 62%;',
 				),

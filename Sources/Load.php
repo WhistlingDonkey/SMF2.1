@@ -1789,14 +1789,14 @@ function loadMemberContext($user, $display_custom_fields = false)
 					'{SCRIPTURL}' => $scripturl,
 					'{IMAGES_URL}' => $settings['images_url'],
 					'{DEFAULT_IMAGES_URL}' => $settings['default_images_url'],
-					'{INPUT}' => $value,
+					'{INPUT}' => tokenTxtReplace($value),
 					'{KEY}' => $currentKey,
 				));
 
 			$memberContext[$user]['custom_fields'][] = array(
-				'title' => !empty($custom['title']) ? $custom['title'] : $custom['col_name'],
-				'col_name' => $custom['col_name'],
-				'value' => un_htmlspecialchars($value),
+				'title' => tokenTxtReplace(!empty($custom['title']) ? $custom['title'] : $custom['col_name']),
+				'col_name' => tokenTxtReplace($custom['col_name']),
+				'value' => un_htmlspecialchars(tokenTxtReplace($value)),
 				'raw' => $profile['options'][$custom['col_name']],
 				'placement' => !empty($custom['placement']) ? $custom['placement'] : 0,
 			);
@@ -1826,8 +1826,8 @@ function loadMemberCustomFields($users, $params)
 		return false;
 
 	// Make sure it's an array.
-	$users = !is_array($users) ? array($users) : array_unique($users);
-	$params = !is_array($params) ? array($params) : array_unique($params);
+	$users = (array) array_unique($users);
+	$params = (array) array_unique($params);
 	$return = array();
 
 	$request = $smcFunc['db_query']('', '
@@ -1848,6 +1848,8 @@ function loadMemberCustomFields($users, $params)
 	{
 		$fieldOptions = array();
 		$currentKey = 0;
+		$row['field_name'] = tokenTxtReplace($row['field_name']);
+		$row['field_desc'] = tokenTxtReplace($row['field_desc']);
 
 		// Create a key => value array for multiple options fields
 		if (!empty($row['field_options']))
@@ -2469,8 +2471,10 @@ function loadTheme($id_theme = 0, $initialize = true)
 	);
 
 	// Add the JQuery library to the list of files to load.
-	if (isset($modSettings['jquery_source']) && $modSettings['jquery_source'] == 'cdn')
-		loadJavaScriptFile('https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js', array('external' => true, 'seed' => false), 'smf_jquery');
+	$jQueryUrls = array ('cdn' => 'https://ajax.googleapis.com/ajax/libs/jquery/'. JQUERY_VERSION . '/jquery.min.js', 'jquery_cdn' => 'https://code.jquery.com/jquery-'. JQUERY_VERSION . '.min.js', 'microsoft_cdn' => 'https://ajax.aspnetcdn.com/ajax/jQuery/jquery-'. JQUERY_VERSION . '.min.js');
+	
+	if (isset($modSettings['jquery_source']) && array_key_exists($modSettings['jquery_source'], $jQueryUrls))
+		loadJavaScriptFile($jQueryUrls[$modSettings['jquery_source']], array('external' => true, 'seed' => false), 'smf_jquery');
 
 	elseif (isset($modSettings['jquery_source']) && $modSettings['jquery_source'] == 'local')
 		loadJavaScriptFile('jquery-' . JQUERY_VERSION . '.min.js', array('seed' => false), 'smf_jquery');
@@ -2478,7 +2482,7 @@ function loadTheme($id_theme = 0, $initialize = true)
 	elseif (isset($modSettings['jquery_source'], $modSettings['jquery_custom']) && $modSettings['jquery_source'] == 'custom')
 		loadJavaScriptFile($modSettings['jquery_custom'], array('external' => true, 'seed' => false), 'smf_jquery');
 
-	// Auto loading? template_javascript() will take care of the local half of this.
+	// Fall back to the forum default
 	else
 		loadJavaScriptFile('https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js', array('external' => true, 'seed' => false), 'smf_jquery');
 
