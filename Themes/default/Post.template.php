@@ -730,7 +730,7 @@ function template_spellcheck()
 		<meta charset="', $context['character_set'], '">
 		<title>', $txt['spell_check'], '</title>
 		<link rel="stylesheet" href="', $settings['theme_url'], '/css/index', $context['theme_variant'], '.css', $context['browser_cache'], '">
-		<style>
+		<style', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>', '
 			body, td {
 				font-size: small;
 				margin: 0;

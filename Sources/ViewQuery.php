@@ -56,7 +56,7 @@ function ViewQuery()
 	<head>
 		<title>', $context['forum_name_html_safe'], '</title>
 		<link rel="stylesheet" href="', $settings['theme_url'], '/css/index', $context['theme_variant'], '.css?alp21">
-		<style>
+		<style', !empty($context['httpSecurityNonce']) ? ' nonce="'. $context['httpSecurityNonce'] .'">' : '>', '
 			body
 			{
 				margin: 1ex;
