@@ -597,7 +597,7 @@ class CreatePost_Notify_Background extends SMF_BackgroundTask
 
 				$replacements = array(
 					'TOPICSUBJECT' => $parsed_message[$localization]['subject'],
-					'POSTERNAME' => un_htmlspecialchars($posterOptions['name']),
+					'POSTERNAME' => un_htmlspecialchars($members_info[$member_id]['name']),
 					'TOPICLINK' => $scripturl . '?topic=' . $topicOptions['id'] . '.new#new',
 					'MESSAGE' => $parsed_message[$localization]['body'],
 					'UNSUBSCRIBELINK' => $scripturl . '?action=notify' . $content_type . ';' . $content_type . '=' . $itemID . ';sa=off;u=' . $member_data['id_member'] . ';token=' . $token,
@@ -663,7 +663,7 @@ class CreatePost_Notify_Background extends SMF_BackgroundTask
 				// Don't want an email, so forget this member in any respawned tasks.
 				unset($msgOptions['quoted_members'][$member_id]);
 			}
-			elseif (TIME_START >= $this->mention_mail_time || in_array($member_id, $this->members['watched']))
+			elseif (TIME_START >= $this->mention_mail_time || in_array($member_id, $this->members['watching']))
 			{
 				$replacements = array(
 					'CONTENTSUBJECT' => $msgOptions['subject'],
@@ -738,7 +738,7 @@ class CreatePost_Notify_Background extends SMF_BackgroundTask
 				// Don't want an email, so forget this member in any respawned tasks.
 				unset($msgOptions['mentioned_members'][$member_id]);
 			}
-			elseif (TIME_START >= $this->mention_mail_time || in_array($member_id, $this->members['watched']))
+			elseif (TIME_START >= $this->mention_mail_time || in_array($member_id, $this->members['watching']))
 			{
 				$replacements = array(
 					'CONTENTSUBJECT' => $msgOptions['subject'],
