@@ -1097,12 +1097,18 @@ function PlushSearch2()
 
 				foreach ($searchWords as $orIndex => $words)
 				{
-					$subject_query_params = array();
+					$subject_query_params = array(
+						'not_redirected' => 0,
+						'never_expires' => 0,
+					);
 					$subject_query = array(
 						'from' => '{db_prefix}topics AS t',
 						'inner_join' => array(),
 						'left_join' => array(),
-						'where' => array(),
+						'where' => array(
+							't.id_redirect_topic = {int:not_redirected}',
+						    't.redirect_expires = {int:never_expires}',
+						),
 					);
 
 					if ($modSettings['postmod_active'])
@@ -1265,13 +1271,18 @@ function PlushSearch2()
 						'{db_prefix}messages AS m ON (m.id_topic = t.id_topic)'
 					),
 					'left_join' => array(),
-					'where' => array(),
+					'where' => array(
+						't.id_redirect_topic = {int:not_redirected}',
+						't.redirect_expires = {int:never_expires}',
+					),
 					'group_by' => array(),
 					'parameters' => array(
 						'min_msg' => $minMsg,
 						'recent_message' => $recentMsg,
 						'huge_topic_posts' => $humungousTopicPosts,
 						'is_approved' => 1,
+						'not_redirected' => 0,
+						'never_expires' => 0,
 					),
 				);
 
@@ -1347,8 +1358,14 @@ function PlushSearch2()
 							'from' => '{db_prefix}topics AS t',
 							'inner_join' => array(),
 							'left_join' => array(),
-							'where' => array(),
-							'params' => array(),
+							'where' => array(
+								't.id_redirect_topic = {int:not_redirected}',
+								't.redirect_expires = {int:never_expires}',
+							),
+							'params' => array(
+								'not_redirected' => 0,
+								'never_expires' => 0,
+							),
 						);
 
 						$numTables = 0;
@@ -2046,7 +2063,7 @@ function prepareSearchContext($reset = false)
 		// Set the number of characters before and after the searched keyword.
 		$charLimit = 50;
 
-		$message['body'] = strtr($message['body'], array("\n" => ' ', '<br>' => "\n"));
+		$message['body'] = strtr($message['body'], array("\n" => ' ', '<br>' => "\n", '<br/>' => "\n", '<br />' => "\n"));
 		$message['body'] = parse_bbc($message['body'], $message['smileys_enabled'], $message['id_msg']);
 		$message['body'] = strip_tags(strtr($message['body'], array('</div>' => '<br>', '</li>' => '<br>')), '<br>');
 
@@ -2317,8 +2334,15 @@ function searchSort($a, $b)
  */
 function highlight($text, array $words)
 {
-	$words = implode('|', array_map('preg_quote', $words));
-	$highlighted = preg_filter('<' . $words . '>iu', '<span class="highlight">$0</span>', $text);
+	$words = build_regex($words, '~');
+
+	$highlighted = '';
+
+	// Don't mess with the content of HTML tags.
+	$parts = preg_split('~(<[^>]+>)~', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+	for ($i = 0, $n = count($parts); $i < $n; $i++)
+		$highlighted .= $i % 2 === 0 ? preg_replace('~' . $words . '~iu', '<mark class="highlight">$0</mark>', $parts[$i]) : $parts[$i];
 
 	if (!empty($highlighted))
 		$text = $highlighted;
