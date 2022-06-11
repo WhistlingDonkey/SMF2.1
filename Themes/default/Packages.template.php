@@ -1861,7 +1861,9 @@ function template_action_permissions()
 			document.getElementById(\'cont\').value = "', $txt['not_done_continue'], ' (" + countdown + ")";
 			countdown--;
 
-			setTimeout("doAutoSubmit();", 1000);
+			setTimeout(function () {
+				doAutoSubmit();
+			}, 1000);
 		}
 	</script>';
 }

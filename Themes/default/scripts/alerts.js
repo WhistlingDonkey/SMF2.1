@@ -30,7 +30,9 @@ var updateAlerts = function ()
 
 		if (localStorage.getItem('alertsPoll') != null && (+(new Date()) - localStorage.getItem('alertsPoll')) < pingTime)
 		{
-			setTimeout(updateAlerts, 1000);
+			setTimeout(function () {
+				updateAlerts();
+			}, 1000);
 			return true;
 		}
 		localStorage.setItem('alertsPoll', +(new Date()));
@@ -90,7 +92,9 @@ var updateAlerts = function ()
 	if (unreadAlerts === 0)
 		$('#alerts_menu_top > .amt:first').remove();
 
-	setTimeout(updateAlerts, pingTime);
+	setTimeout(function () {
+		updateAlerts();
+	}, pingTime);
 }
 
 $(function ()
@@ -109,7 +113,9 @@ $(function ()
 	}
 	else if (permission == notify.PERMISSION_GRANTED)
 	{
-		setTimeout(updateAlerts, pingTime);
+		setTimeout(function () {
+			updateAlerts();
+		}, pingTime);
 		if (typeof localStorage != 'undefined')
 			localStorage.setItem('alertsCounter', parseInt($('#alerts_menu_top > .amt:first').text() ? $('#alerts_menu_top > .amt:first').text() : 0));
 	}

@@ -225,10 +225,14 @@ function template_maintain_members()
 
 			document.getElementById(\'do_attribute\').disabled = valid ? \'\' : \'disabled\';
 
-			setTimeout("checkAttributeValidity();", 500);
+			setTimeout(function () {
+				checkAttributeValidity();
+			}, 500);
 			return valid;
 		}
-		setTimeout("checkAttributeValidity();", 500);
+		setTimeout(function () {
+			checkAttributeValidity();
+		}, 500);
 	</script>
 	<div id="manage_maintenance">';
 

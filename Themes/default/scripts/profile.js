@@ -312,6 +312,8 @@ function export_download_all(format)
 		$('body').append(iframe);
 
 		// Give plenty of time for the download to complete, then clean up.
-		setTimeout(function() { iframe.remove(); }, 30000);
+		setTimeout(function() {
+			iframe.remove();
+		}, 30000);
 	});
 }

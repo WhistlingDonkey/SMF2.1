@@ -184,7 +184,9 @@ function template_maintenance()
 		</form>
 		<script>
 			function start_progress() {
-				setTimeout(\'show_msg()\', 1000);
+				setTimeout(function () {
+					show_msg();
+				}, 1000);
 			}
 
 			function show_msg() {
@@ -194,7 +196,9 @@ function template_maintenance()
 
 			function show_progress() {
 				$(\'#show_progress\').on("load", "progress.php");
-				setTimeout(\'show_progress()\', 1500);
+				setTimeout(function () {
+					show_progress();
+				}, 1500);
 			}
 
 		</script>

@@ -392,7 +392,9 @@ smc_AutoSuggest.prototype.deleteAddedItem = function (sItemId)
 smc_AutoSuggest.prototype.autoSuggestHide = function ()
 {
 	// Delay to allow events to propogate through....
-	this.oHideTimer = setTimeout(this.opt.sSelf + '.autoSuggestActualHide();', 250);
+	this.oHideTimer = setTimeout(function () {
+		this.opt.sSelf + '.autoSuggestActualHide();'
+	}, 250);
 }
 
 // Do the actual hiding after a timeout.

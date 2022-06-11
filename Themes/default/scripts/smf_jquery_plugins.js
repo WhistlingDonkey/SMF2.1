@@ -436,7 +436,9 @@
 				}
 				else {
 					clearTimeout(o.sfTimer);
-					o.sfTimer = setTimeout($.proxy(close, $this, o), o.delay);
+					o.sfTimer = setTimeout(function () {
+						$.proxy(close, $this, o);
+					}, o.delay);
 				}
 			},
 			close = function (o) {
@@ -663,7 +665,9 @@
 				// set previous coordinates for next time
 				pX = cX; pY = cY;
 				// use self-calling timeout, guarantees intervals are spaced out properly (avoids JavaScript timer bugs)
-				ob.hoverIntent_t = setTimeout( function(){compare(ev, ob);} , cfg.interval );
+				ob.hoverIntent_t = setTimeout(function () {
+					compare(ev, ob);
+				} , cfg.interval );
 			}
 		};
 
@@ -690,14 +694,18 @@
 				// update "current" X and Y position based on mousemove
 				$(ob).on("mousemove.hoverIntent",track);
 				// start polling interval (self-calling timeout) to compare mouse coordinates over time
-				if (ob.hoverIntent_s != 1) { ob.hoverIntent_t = setTimeout( function(){compare(ev,ob);} , cfg.interval );}
+				if (ob.hoverIntent_s != 1) { ob.hoverIntent_t = setTimeout(function () {
+					compare(ev,ob);
+				} , cfg.interval );}
 
 				// else e.type == "mouseleave"
 			} else {
 				// unbind expensive mousemove event
 				$(ob).off("mousemove.hoverIntent",track);
 				// if hoverIntent state is true, then call the mouseOut function after the specified delay
-				if (ob.hoverIntent_s == 1) { ob.hoverIntent_t = setTimeout( function(){delay(ev,ob);} , cfg.timeout );}
+				if (ob.hoverIntent_s == 1) { ob.hoverIntent_t = setTimeout(function () {
+					delay(ev,ob);
+				} , cfg.timeout );}
 			}
 		};
 

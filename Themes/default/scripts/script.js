@@ -744,9 +744,13 @@ function smf_sessionKeepAlive()
 		lastKeepAliveCheck = curTime;
 	}
 
-	window.setTimeout('smf_sessionKeepAlive();', 1200000);
+	window.setTimeout(function () {
+		smf_sessionKeepAlive();
+	}, 1200000);
 }
-window.setTimeout('smf_sessionKeepAlive();', 1200000);
+window.setTimeout(function () {
+	smf_sessionKeepAlive();
+}, 1200000);
 
 // Set a theme option through javascript.
 function smf_setThemeOption(theme_var, theme_value, theme_id, theme_cur_session_id, theme_cur_session_var, theme_additional_vars)
@@ -1323,7 +1327,9 @@ IconList.prototype.onItemHover = function (oDiv, bMouseOver)
 	if (bMouseOver)
 		this.onBoxHover(this.oClickedIcon, true);
 	else
-		this.iCurTimeout = window.setTimeout(this.opt.sBackReference + '.collapseList();', 500);
+		this.iCurTimeout = window.setTimeout(function () {
+			this.opt.sBackReference + '.collapseList()';
+		}, 500);
 }
 
 // Event handler for clicking on one of the icons.

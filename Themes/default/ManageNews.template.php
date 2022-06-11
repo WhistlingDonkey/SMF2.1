@@ -424,7 +424,9 @@ function template_email_members_send()
 			document.forms.autoSubmit.b.value = "', $txt['email_continue'], ' (" + countdown + ")";
 			countdown--;
 
-			setTimeout("doAutoSubmit();", 1000);
+			setTimeout(function () {
+				doAutoSubmit();
+			}, 1000);
 		}
 	</script>';
 }

@@ -12,7 +12,9 @@ function smf_DraftAutoSave(oOptions)
 	this.sCheckDraft = '';
 
 	// slight delay on autosave init to allow sceditor to create the iframe
-	setTimeout('addLoadEvent(' + this.opt.sSelf + '.init())', 4000);
+	setTimeout(function() {
+		addLoadEvent(' + this.opt.sSelf + '.init());
+	}, 4000);
 }
 
 // Start our self calling routine

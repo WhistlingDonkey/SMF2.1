@@ -3940,7 +3940,9 @@ function template_upgrade_below()
 			document.getElementById(\'contbutt\').value = "', $txt['upgrade_continue'], ' (" + countdown + ")";
 			countdown--;
 
-			setTimeout("doAutoSubmit();", 1000);
+			setTimeout(function () {
+				doAutoSubmit();
+			}, 1000);
 		}
 	</script>';
 	}
@@ -4428,7 +4430,9 @@ function template_database_changes()
 							// We want to track this...
 							if (timeOutID)
 								clearTimeout(timeOutID);
-							timeOutID = window.setTimeout("retTimeout()", ', (10 * $timeLimitThreshold), '000);
+							timeOutID = window.setTimeout(function () {
+								retTimeout();
+							}, ', (10 * $timeLimitThreshold), '000);
 
 							getXMLDocument(\'', $upcontext['form_url'], '&xml&filecount=', $upcontext['file_count'], '&substep=\' + lastItem + getData, onItemUpdate);
 						}

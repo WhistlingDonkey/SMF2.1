@@ -2638,7 +2638,9 @@ function loadTheme($id_theme = 0, $initialize = true)
 		{
 			$.get(smf_scripturl + "?scheduled=' . $type . ';ts=' . $ts . '");
 		}
-		window.setTimeout("smfAutoTask();", 1);');
+		window.setTimeout(function () {
+			smfAutoTask();
+		}, 1);');
 		}
 	}
 
@@ -2652,7 +2654,9 @@ function loadTheme($id_theme = 0, $initialize = true)
 	{
 		$.get(' . JavaScriptEscape($boardurl) . ' + "/cron.php?ts=' . $ts . '");
 	}
-	window.setTimeout(triggerCron, 1);', true);
+	window.setTimeout(function () {
+		triggerCron();
+	}, 1);', true);
 	}
 
 	// Filter out the restricted boards from the linktree
