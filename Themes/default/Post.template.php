@@ -218,7 +218,7 @@ function template_main()
 		echo '
 								<p id="pollMoreOptions"></p>
 							</dl>
-							<strong><a href="javascript:addPollOption(); void(0);">(', $txt['poll_add_option'], ')</a></strong>
+							<button type="button" class="link-btn" onclick="addPollOption(); void(0);"><strong>(', $txt['poll_add_option'], ')</strong></button>
 						</fieldset>
 						<fieldset id="poll_options">
 							<legend>', $txt['poll_options'], '</legend>
@@ -379,8 +379,8 @@ function template_main()
 										<div class="bar"></div>
 									</div>
 									<div class="attach-ui">
-										<a data-dz-remove class="button cancel">', $txt['modify_cancel'], '</a>
-										<a class="button upload">', $txt['upload'], '</a>
+										<button type="button" data-dz-remove class="button cancel">', $txt['modify_cancel'], '</button>
+										<button type="button" class="button upload">', $txt['upload'], '</button>
 									</div>
 								</div><!-- .attachment_info -->
 							</div><!-- #au-template -->
@@ -399,16 +399,16 @@ function template_main()
 											<strong>', $txt['attach_drop_zone'], '</strong>
 										</div>
 										<div class="righttext">
-											<a class="button" id="attach_cancel_all">', $txt['attached_cancel_all'], '</a>
-											<a class="button" id="attach_upload_all">', $txt['attached_upload_all'], '</a>
-											<a class="button fileinput-button">', $txt['attach_add'], '</a>
+											<button type="button" class="button" id="attach_cancel_all">', $txt['attached_cancel_all'], '</button>
+											<button type="button" class="button" id="attach_upload_all">', $txt['attached_upload_all'], '</button>
+											<button type="button" class="button fileinput-button">', $txt['attach_add'], '</button>
 										</div>
 									</div>
 									<div id="total_progress" class="progress_bar" role="progressBar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
 										<div class="bar"></div>
 									</div>
 									<div class="fallback">
-										<input type="file" multiple="multiple" name="attachment[]" id="attachment1" class="fallback"> (<a href="javascript:void(0);" onclick="cleanFileInput(\'attachment1\');">', $txt['clean_attach'], '</a>)';
+										<input type="file" multiple="multiple" name="attachment[]" id="attachment1" class="fallback"> (<button type="button" class="link-btn" onclick="cleanFileInput(\'attachment1\');">', $txt['clean_attach'], '</button>)';
 
 		if (!empty($modSettings['attachmentSizeLimit']))
 			echo '
@@ -663,7 +663,7 @@ function template_main()
 			if ($context['can_quote'])
 				echo '
 					<ul class="quickbuttons" id="msg_', $post['id'], '_quote">
-						<li style="display:none;" id="quoteSelected_', $post['id'], '" data-msgid="', $post['id'], '"><a href="javascript:void(0)"><span class="main_icons quote_selected"></span>', $txt['quote_selected_action'], '</a></li>
+						<li style="display:none;" id="quoteSelected_', $post['id'], '" data-msgid="', $post['id'], '"><button type="button" class="link-btn"><span class="main_icons quote_selected"></span>', $txt['quote_selected_action'], '</button></li>
 						<li id="post_modify"><a href="#postmodify" onclick="return insertQuoteFast(', $post['id'], ');"><span class="main_icons quote"></span>', $txt['quote'], '</a></li>
 					</ul>';
 

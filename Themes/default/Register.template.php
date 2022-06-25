@@ -117,9 +117,9 @@ function template_registration_form()
 						<dd>
 							<input type="text" name="user" id="smf_autov_username" size="50" tabindex="', $context['tabindex']++, '" maxlength="25" value="', isset($context['username']) ? $context['username'] : '', '">
 							<span id="smf_autov_username_div" style="display: none;">
-								<a id="smf_autov_username_link" href="#">
+								<button type="button" class="link-btn" id="smf_autov_username_link">
 									<span id="smf_autov_username_img" class="main_icons check"></span>
-								</a>
+								</button>
 							</span>
 						</dd>
 						<dt><strong><label for="smf_autov_reserve1">', $txt['user_email_address'], ':</label></strong></dt>
@@ -476,7 +476,7 @@ function template_verification_sound()
 			<br>
 			<a href="', $context['verification_sound_href'], ';sound" rel="nofollow">', $txt['visual_verification_sound_again'], '</a><br>
 			<a href="', $context['verification_sound_href'], '" rel="nofollow">', $txt['visual_verification_sound_direct'], '</a><br><br>
-			<a href="javascript:self.close();">', $txt['visual_verification_sound_close'], '</a><br>
+			<button type="button" class="link-btn" data-func="close">', $txt['visual_verification_sound_close'], '</button><br>
 		</div><!-- .description -->
 	</body>
 </html>';

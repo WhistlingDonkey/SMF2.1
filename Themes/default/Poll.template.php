@@ -89,7 +89,7 @@ function template_main()
 	echo '
 							<p id="pollMoreOptions"></p>
 						</dl>
-						<strong><a href="javascript:addPollOption(); void(0);">(', $txt['poll_add_option'], ')</a></strong>
+						<button type="button" class="link-btn" onclick="addPollOption(); void(0);"><strong>(', $txt['poll_add_option'], ')</strong></button>
 					</fieldset>
 					<fieldset id="poll_options">
 						<legend>', $txt['poll_options'], ':</legend>

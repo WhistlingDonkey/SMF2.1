@@ -139,9 +139,9 @@ $(function() {
 		$('#quoteSelected_' + oSelected.msgID).show();
 
 		// Remove any previous selection
-		$(document).off('click', '#quoteSelected_' + oSelected.msgID + ' a');
+		$(document).off('click', '#quoteSelected_' + oSelected.msgID + ' button');
 
-		$(document).one('click', '#quoteSelected_' + oSelected.msgID + ' a', function(e) {
+		$(document).one('click', '#quoteSelected_' + oSelected.msgID + ' button', function(e) {
 			e.preventDefault();
 			quotedTextClick(oSelected);
 		});
@@ -156,7 +156,7 @@ $(function() {
 					return;
 
 				// Remove any 'click' event to the button.
-				$(document).off('click', '#quoteSelected_' + oSelected.msgID + ' a');
+				$(document).off('click', '#quoteSelected_' + oSelected.msgID + ' button');
 
 				// Hide the button.
 				$('#quoteSelected_' + oSelected.msgID).hide();

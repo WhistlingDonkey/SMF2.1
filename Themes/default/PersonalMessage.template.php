@@ -1336,7 +1336,7 @@ function template_ask_delete()
 		<div class="windowbg">
 			<p>', $txt['delete_all_confirm'], '</p>
 			<br>
-			<strong><a href="', $scripturl, '?action=pm;sa=removeall2;f=', $context['folder'], ';', $context['current_label_id'] != -1 ? ';l=' . $context['current_label_id'] : '', ';', $context['session_var'], '=', $context['session_id'], '">', $txt['yes'], '</a> - <a href="javascript:history.go(-1);">', $txt['no'], '</a></strong>
+			<strong><a href="', $scripturl, '?action=pm;sa=removeall2;f=', $context['folder'], ';', $context['current_label_id'] != -1 ? ';l=' . $context['current_label_id'] : '', ';', $context['session_var'], '=', $context['session_id'], '">', $txt['yes'], '</a> - </strong><button type="button" class="link-btn" onclick="javascript:history.go(-1);"><strong>', $txt['no'], '</strong></button>
 		</div>';
 }
 
@@ -1819,7 +1819,7 @@ function template_add_rule()
 
 	echo '
 				<span id="criteriaAddHere"></span><br>
-				<a href="#" onclick="addCriteriaOption(); return false;" id="addonjs1" style="display: none;">(', $txt['pm_rule_criteria_add'], ')</a>
+				<button type="button" class="link-btn" onclick="addCriteriaOption(); return false;" id="addonjs1" style="display: none;">(', $txt['pm_rule_criteria_add'], ')</button>
 				<br><br>
 				', $txt['pm_rule_logic'], ':
 				<select name="rule_logic" id="logic" onchange="rebuildRuleDesc();">
@@ -1870,7 +1870,7 @@ function template_add_rule()
 
 	echo '
 				<span id="actionAddHere"></span><br>
-				<a href="#" onclick="addActionOption(); return false;" id="addonjs2" style="display: none;">(', $txt['pm_rule_add_action'], ')</a>
+				<button type="button" class="link-btn" onclick="addActionOption(); return false;" id="addonjs2" style="display: none;">(', $txt['pm_rule_add_action'], ')</button>
 			</fieldset>
 			<div class="cat_bar">
 				<h3 class="catbg">', $txt['pm_rule_description'], '</h3>

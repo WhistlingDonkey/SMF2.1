@@ -156,7 +156,7 @@ function smf_fileUpload(oOptions) {
 
 		// Create a function to insert the BBC attach tag.
 		file.insertAttachment = function (_innerElement, response) {
-			insertButton = $('<a />')
+			insertButton = $('<button type="button"/>')
 				.addClass('button')
 				.addClass('insertBBC')
 				.prop('disabled', false)
@@ -179,11 +179,11 @@ function smf_fileUpload(oOptions) {
 		// Replace the file with a message when the attachment has been deleted.
 		file.deleteAttachment = function (_innerElement, attachmentId, file) {
 
-			deleteButton = $('<a />')
+			deleteButton = $('<button type="button"/>')
 				.addClass('button')
 				.prop('disabled', false)
 				.text(myDropzone.options.text_deleteAttach)
-				.one('click', function (e) {
+				.on('click', function (e) {
 
 					$this = $(this);
 
@@ -480,7 +480,7 @@ function smf_fileUpload(oOptions) {
 	});
 
 	// Add an event for uploading and cancelling all files.
-	$('a#attach_cancel_all').on('click', function () {
+	$('button#attach_cancel_all').on('click', function () {
 
 		if (!confirm(smf_you_sure))
 			return;
@@ -493,7 +493,7 @@ function smf_fileUpload(oOptions) {
 		myDropzone.options.hideFileProgressAndAllButtonsIfNeeded();
 	});
 
-	$('a#attach_upload_all').on('click', function () {
+	$('button#attach_upload_all').on('click', function () {
 
 		if (!confirm(smf_you_sure)) {
 			return;

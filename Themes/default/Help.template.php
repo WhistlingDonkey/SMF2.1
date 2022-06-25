@@ -31,7 +31,7 @@ function template_popup()
 		<div class="windowbg description">
 			', $context['help_text'], '<br>
 			<br>
-			<a href="javascript:self.close();">', $txt['close_window'], '</a>
+			<button type="button" class="link-btn" data-func="close">', $txt['close_window'], '</button>
 		</div>
 	</body>
 </html>';
@@ -117,7 +117,7 @@ function template_find_members()
 			echo '
 					<li class="windowbg">
 						<a href="', $result['href'], '" target="_blank" rel="noopener"> <span class="main_icons profile_sm"></span>
-						<a href="javascript:void(0);" onclick="addMember(this.innerHTML); return false;">', $result['name'], '</a>
+						<button type="button" class="link-btn" onclick="addMember(this.innerHTML); return false;">', $result['name'], '</button>
 					</li>';
 
 		echo '

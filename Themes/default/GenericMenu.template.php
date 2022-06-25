@@ -34,7 +34,7 @@ function template_generic_menu_dropdown_above()
 			<div class="popup_window description">
 				<div class="popup_heading">
 					', sprintf($txt['mobile_generic_menu'], $menu_label), '
-					<a href="javascript:void(0);" class="main_icons hide_popup"></a>
+					<button type="button" class="closebutton main_icons hide_popup"></button>
 				</div>
 				', template_generic_menu($menu_context), '
 			</div>
@@ -259,7 +259,7 @@ function template_generic_menu_tabs(&$menu_context)
 							<div class="popup_window description">
 								<div class="popup_heading">
 									', sprintf($txt['mobile_generic_menu'], $tab_context['title']), '
-									<a href="javascript:void(0);" class="main_icons hide_popup"></a>
+									<button type="button" class="closebutton main_icons hide_popup"></button>
 								</div>';
 
 		echo '

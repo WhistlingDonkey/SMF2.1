@@ -45,7 +45,7 @@ function template_popup()
 	echo '
 			</ul>
 			<br class="clear">
-			<a href="javascript:self.close();">', $txt['close_window'], '</a>
+			<button type="button" class="link-btn" data-func="close">', $txt['close_window'], '</button>
 		</div><!-- .windowbg -->
 	</body>
 </html>';

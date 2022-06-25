@@ -206,7 +206,7 @@ function EditNews()
 				'position' => 'bottom_of_list',
 				'value' => '
 				<span id="moreNewsItems_link" class="floatleft" style="display: none;">
-					<a class="button" href="javascript:void(0);" onclick="addNewsItem(); return false;">' . $txt['editnews_clickadd'] . '</a>
+					<button type="button" class="button" onclick="addNewsItem(); return false;">' . $txt['editnews_clickadd'] . '</button>
 				</span>
 				<input type="submit" name="save_items" value="' . $txt['save'] . '" class="button">
 				<input type="submit" name="delete_selection" value="' . $txt['editnews_remove_selected'] . '" data-confirm="' . $txt['editnews_remove_confirm'] . '" class="button you_sure">',

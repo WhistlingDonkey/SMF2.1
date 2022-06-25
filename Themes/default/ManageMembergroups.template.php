@@ -453,7 +453,7 @@ function template_add_edit_group_boards_list($collapse = true, $form_id = 'new_g
 		if (empty($modSettings['deny_boards_access']))
 			echo '
 									<li class="category">
-										<a href="javascript:void(0);" onclick="selectBoards([', implode(', ', $category['child_ids']), '], \''.$form_id.'\'); return false;"><strong>', $category['name'], '</strong></a>
+										<button type="button" class="link-btn" onclick="selectBoards([', implode(', ', $category['child_ids']), '], \''.$form_id.'\'); return false;"><strong>', $category['name'], '</strong></button>
 										<ul>';
 		else
 			echo '
@@ -523,7 +523,7 @@ function template_add_edit_group_boards_list($collapse = true, $form_id = 'new_g
 
 	if ($collapse)
 		echo '
-							<a href="javascript:void(0);" onclick="document.getElementById(\'visible_boards\').classList.remove(\'hidden\'); document.getElementById(\'visible_boards_link\').classList.add(\'hidden\'); return false;" id="visible_boards_link" class="hidden">[ ', $txt['membergroups_select_visible_boards'], ' ]</a>
+							<button type="button" class="link-btn hidden" onclick="document.getElementById(\'visible_boards\').classList.remove(\'hidden\'); document.getElementById(\'visible_boards_link\').classList.add(\'hidden\'); return false;" id="visible_boards_link">[ ', $txt['membergroups_select_visible_boards'], ' ]</button>
 							<script>
 								document.getElementById("visible_boards_link").classList.remove(\'hidden\');
 								document.getElementById("visible_boards").classList.add(\'hidden\');

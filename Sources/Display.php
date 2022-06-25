@@ -1562,7 +1562,6 @@ function prepareDisplayContext($reset = false)
 		'quote_selected' => array(
 			'label' => $txt['quote_selected_action'],
 			'id' => 'quoteSelected_'. $output['id'],
-			'href' => 'javascript:void(0)',
 			'custom' => 'style="display:none"',
 			'icon' => 'quote_selected',
 			'show' => $context['can_quote']

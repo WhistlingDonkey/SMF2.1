@@ -594,7 +594,7 @@ function template_edit_censored()
 								</div>
 								<div id="moreCensoredWords"></div>
 								<div class="block hidden" id="moreCensoredWords_link">
-									<a class="button" href="#" onclick="addNewWord(); return false;">', $txt['censor_clickadd'], '</a><br>
+									<button type="button" class="button" href="#" onclick="addNewWord(); return false;">', $txt['censor_clickadd'], '</button><br>
 								</div>
 								<script>
 									document.getElementById("moreCensoredWords_link").classList.remove(\'hidden\');
@@ -1406,10 +1406,10 @@ function template_callback_question_answer_list()
 
 		echo '
 						<dt id="qa_dt_', $lang_id, '" class="qa_link">
-							<a href="javascript:void(0);">[ ', $lang['name'], ' ]</a>
+							<button type="button" class="link-btn">[ ', $lang['name'], ' ]</button>
 						</dt>
 						<fieldset id="qa_fs_', $lang_id, '" class="qa_fieldset">
-							<legend><a href="javascript:void(0);">', $lang['name'], '</a></legend>
+							<legend><button type="button" class="link-btn">', $lang['name'], '</button></legend>
 							<dl class="settings">
 								<dt>
 									<strong>', $txt['setup_verification_question'], '</strong>
@@ -1434,12 +1434,12 @@ function template_callback_question_answer_list()
 									<input type="text" name="answer[', $lang_id, '][', $q_id, '][]" value="', $answer, '" size="50" class="verification_answer">';
 
 				echo '
-									<div class="qa_add_answer"><a href="javascript:void(0);">[ ', $txt['setup_verification_add_answer'], ' ]</a></div>
+									<div class="qa_add_answer"><button type="button" class="link-btn">[ ', $txt['setup_verification_add_answer'], ' ]</button></div>
 								</dd>';
 			}
 
 		echo '
-								<dt class="qa_add_question"><a href="javascript:void(0);">[ ', $txt['setup_verification_add_more'], ' ]</a></dt>
+								<dt class="qa_add_question"><button type="button" class="link-btn">[ ', $txt['setup_verification_add_more'], ' ]</button></dt>
 							</dl>
 						</fieldset>';
 	}

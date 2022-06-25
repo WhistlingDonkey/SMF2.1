@@ -1444,7 +1444,7 @@ function UnreadTopics()
 			$context['recent_buttons']['markselectread'] = array(
 				'text' => 'quick_mod_markread',
 				'image' => 'markselectedread.png',
-				'url' => 'javascript:document.quickModForm.submit();',
+				'javascript' => 'onclick="document.quickModForm.submit();"',
 			);
 
 		if (!empty($context['topics']) && !$context['showing_all_topics'])
@@ -1460,7 +1460,7 @@ function UnreadTopics()
 			$context['recent_buttons']['markselectread'] = array(
 				'text' => 'quick_mod_markread',
 				'image' => 'markselectedread.png',
-				'url' => 'javascript:document.quickModForm.submit();',
+				'javascript' => 'onclick="document.quickModForm.submit();"',
 			);
 	}
 

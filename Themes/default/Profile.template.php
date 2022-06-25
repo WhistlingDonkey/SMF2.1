@@ -384,7 +384,7 @@ function template_summary()
 		{
 			echo '
 				<dt class="clear">
-					<span class="alert">', $txt['user_is_banned'], '</span>&nbsp;[<a href="#" onclick="document.getElementById(\'ban_info\').classList.toggle(\'hidden\');return false;">' . $txt['view_ban'] . '</a>]
+					<span class="alert">', $txt['user_is_banned'], '</span>&nbsp;[<button type="button" class="link-btn" onclick="document.getElementById(\'ban_info\').classList.toggle(\'hidden\');return false;">' . $txt['view_ban'] . '</button>]
 				</dt>
 				<dt class="clear hidden" id="ban_info">
 					<strong>', $txt['user_banned_by_following'], ':</strong>';
@@ -2219,7 +2219,7 @@ function template_ignoreboards()
 	{
 		echo '
 					<li>
-						<a href="javascript:void(0);" onclick="selectBoards([', implode(', ', $category['child_ids']), '], \'creator\'); return false;">', $category['name'], '</a>
+						<button type="button" class="link-btn" onclick="selectBoards([', implode(', ', $category['child_ids']), '], \'creator\'); return false;">', $category['name'], '</button>
 						<ul>';
 
 		$cat_boards = array_values($category['boards']);
@@ -2792,7 +2792,7 @@ function template_profile_group_manage()
 
 	echo '
 								</span>
-								<a href="javascript:void(0);" onclick="document.getElementById(\'additional_groupsList\').style.display = \'block\'; document.getElementById(\'additional_groupsLink\').style.display = \'none\'; return false;" id="additional_groupsLink" style="display: none;" class="toggle_down">', $txt['additional_membergroups_show'], '</a>
+								<button type="button" class="link-btn toggle_down" onclick="document.getElementById(\'additional_groupsList\').style.display = \'block\'; document.getElementById(\'additional_groupsLink\').style.display = \'none\'; return false;" id="additional_groupsLink" style="display: none;">', $txt['additional_membergroups_show'], '</button>
 								<script>
 									document.getElementById("additional_groupsList").style.display = "none";
 									document.getElementById("additional_groupsLink").style.display = "";
@@ -3235,7 +3235,7 @@ function template_tfasetup()
 	if (!empty($context['from_ajax']))
 		echo '
 					<br>
-					<a href="javascript:self.close();"></a>';
+					<button type="button" class="link-btn" data-func="close"></button>';
 
 	echo '
 				</div>

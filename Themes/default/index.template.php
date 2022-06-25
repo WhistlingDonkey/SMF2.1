@@ -422,7 +422,7 @@ function template_body_above()
 					<div id="mobile_user_menu" class="popup_container">
 						<div class="popup_window description">
 							<div class="popup_heading">', $txt['mobile_user_menu'], '
-								<a href="javascript:void(0);" class="main_icons hide_popup"></a>
+								<button type="button" class="closebutton main_icons hide_popup"></button>
 							</div>
 							', template_menu(), '
 						</div>
@@ -635,9 +635,13 @@ function template_button_strip($button_strip, $direction = '', $strip_options = 
 			if (!isset($value['id']))
 				$value['id'] = $key;
 
+			if (isset($value['url']))
 			$button = '
 				<a class="button button_strip_' . $key . (!empty($value['active']) ? ' active' : '') . (isset($value['class']) ? ' ' . $value['class'] : '') . '" ' . (!empty($value['url']) ? 'href="' . $value['url'] . '"' : '') . ' ' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '>'.(!empty($value['icon']) ? '<span class="main_icons '.$value['icon'].'"></span>' : '').'' . $txt[$value['text']] . '</a>';
-
+			else
+				$button = '
+				<button type="button" class="button button_strip_' . $key . (!empty($value['active']) ? ' active' : '') . (isset($value['class']) ? ' ' . $value['class'] : '') . '" ' . (!empty($value['javascript']) ? ' ' . $value['javascript'] : '') . ' ' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '>'.(!empty($value['icon']) ? '<span class="main_icons '.$value['icon'].'"></span>' : '').'' . $txt[$value['text']] . '</button>';				
+			
 			if (!empty($value['sub_buttons']))
 			{
 				$button .= '
@@ -726,10 +730,16 @@ function template_quickbuttons($list_items, $list_class = null, $output_method =
 		if (isset($li['content']))
 			$html .= $li['content'];
 		else
-			$html .= '
-				<a href="' . (!empty($li['href']) ? $li['href'] : 'javascript:void(0);') . '"' . (!empty($li['javascript']) ? ' ' . $li['javascript'] : '') . '>
-					' . (!empty($li['icon']) ? '<span class="main_icons ' . $li['icon'] . '"></span>' : '') . (!empty($li['label']) ? $li['label'] : '') . '
-				</a>';
+			if (empty($li['href']))
+				$html .= '
+					<button type="button" class="button"' . (!empty($li['javascript']) ? ' ' . $li['javascript'] : '') . '>
+						' . (!empty($li['icon']) ? '<span class="main_icons ' . $li['icon'] . '"></span>' : '') . (!empty($li['label']) ? $li['label'] : '') . '
+					</a>';
+			else
+				$html .= '
+					<a href="' . $li['href'] . '"' . (!empty($li['javascript']) ? ' ' . $li['javascript'] : '') . '>
+						' . (!empty($li['icon']) ? '<span class="main_icons ' . $li['icon'] . '"></span>' : '') . (!empty($li['label']) ? $li['label'] : '') . '
+					</a>';
 
 		$html .= '
 			</li>';
@@ -744,7 +754,7 @@ function template_quickbuttons($list_items, $list_class = null, $output_method =
 		{
 			$output .= '
 			<li class="post_options">
-				<a href="javascript:void(0);">' . $txt['post_options'] . '</a>
+				<button type="button" class="button">' . $txt['post_options'] . '</button>
 				<ul>';
 
 			foreach ($li as $subli)

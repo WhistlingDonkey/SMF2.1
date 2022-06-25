@@ -627,7 +627,7 @@ function template_browse()
 						<dt>
 							<strong>', $txt['package_emulate'], ':</strong><br>
 							<span class="smalltext">
-								<a href="#" onclick="return revert();">', $txt['package_emulate_revert'], '</a>
+								<button type="button" class="link-btn" onclick="return revert();">', $txt['package_emulate_revert'], '</button>
 							</span>
 						</dt>
 						<dd>
@@ -850,7 +850,7 @@ function template_package_confirm()
 		</div>
 		<div class="windowbg">
 			<p>', $context['confirm_message'], '</p>
-			<a href="', $context['proceed_href'], '">[ ', $txt['package_confirm_proceed'], ' ]</a> <a href="JavaScript:history.go(-1);">[ ', $txt['package_confirm_go_back'], ' ]</a>
+			<a href="', $context['proceed_href'], '">[ ', $txt['package_confirm_proceed'], ' ]</a> <button type="button" class="link-btn" onclick="JavaScript:history.go(-1);">[ ', $txt['package_confirm_go_back'], ' ]</button>
 		</div>';
 }
 

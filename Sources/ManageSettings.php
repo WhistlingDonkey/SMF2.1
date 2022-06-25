@@ -801,22 +801,22 @@ function ModifyAntispamSettings($return_config = false)
 	// Thirdly, push some JavaScript for the form to make it work.
 	addInlineJavaScript('
 	var nextrow = ' . (!empty($context['question_answers']) ? max(array_keys($context['question_answers'])) + 1 : 1) . ';
-	$(".qa_link a").click(function() {
+	$(".qa_link button").click(function() {
 		var id = $(this).parent().attr("id").substring(6);
 		$("#qa_fs_" + id).show();
 		$(this).parent().hide();
 	});
-	$(".qa_fieldset legend a").click(function() {
+	$(".qa_fieldset legend button").click(function() {
 		var id = $(this).closest("fieldset").attr("id").substring(6);
 		$("#qa_dt_" + id).show();
 		$(this).closest("fieldset").hide();
 	});
-	$(".qa_add_question a").click(function() {
+	$(".qa_add_question button").click(function() {
 		var id = $(this).closest("fieldset").attr("id").substring(6);
-		$(\'<dt><input type="text" name="question[\' + id + \'][\' + nextrow + \']" value="" size="50" class="verification_question"></dt><dd><input type="text" name="answer[\' + id + \'][\' + nextrow + \'][]" value="" size="50" class="verification_answer" / ><div class="qa_add_answer"><a href="javascript:void(0);">[ \' + ' . JavaScriptEscape($txt['setup_verification_add_answer']) . ' + \' ]</a></div></dd>\').insertBefore($(this).parent());
+		$(\'<dt><input type="text" name="question[\' + id + \'][\' + nextrow + \']" value="" size="50" class="verification_question"></dt><dd><input type="text" name="answer[\' + id + \'][\' + nextrow + \'][]" value="" size="50" class="verification_answer" / ><div class="qa_add_answer"><button type="button" class="link-btn">[ \' + ' . JavaScriptEscape($txt['setup_verification_add_answer']) . ' + \' ]</button></div></dd>\').insertBefore($(this).parent());
 		nextrow++;
 	});
-	$(".qa_fieldset ").on("click", ".qa_add_answer a", function() {
+	$(".qa_fieldset ").on("click", ".qa_add_answer button", function() {
 		var attr = $(this).closest("dd").find(".verification_answer:last").attr("name");
 		$(\'<input type="text" name="\' + attr + \'" value="" size="50" class="verification_answer">\').insertBefore($(this).closest("div"));
 		return false;

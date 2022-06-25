@@ -158,7 +158,7 @@ function template_login()
 	if (!empty($context['from_ajax']))
 		echo '
 				<br>
-				<a href="javascript:self.close();"></a>';
+				<button type="button" class="link-btn" data-func="close"></button>';
 
 	echo '
 			</div><!-- .roundframe -->

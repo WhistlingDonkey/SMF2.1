@@ -364,7 +364,7 @@ function reqOverlayDiv(desktopURL, sHeader, sIcon)
 		beforeSend: function () {
 		},
 		success: function (data, textStatus, xhr) {
-			var help_content = $('<div id="temp_help">').html(data).find('a[href$="self.close();"]').hide().prev('br').hide().parent().html();
+			var help_content = $('<div id="temp_help">').html(data).find('button[data-func="close"]').hide().prev('br').hide().parent().html();
 			oPopup_body.html(help_content);
 		},
 		error: function (xhr, textStatus, errorThrown) {
@@ -493,7 +493,7 @@ smc_Popup.prototype.show = function ()
 		icon = this.opt.icon ? '<img src="' + this.opt.icon + '" class="icon" alt=""> ' : '';
 
 	// Create the div that will be shown
-	$('body').append('<div id="' + this.popup_id + '" class="popup_container"><div class="' + popup_class + '"><div class="catbg popup_heading"><a href="javascript:void(0);" class="main_icons hide_popup"></a>' + icon + this.opt.heading + '</div><div class="popup_content">' + this.opt.content + '</div></div></div>');
+	$('body').append('<div id="' + this.popup_id + '" class="popup_container"><div class="' + popup_class + '"><div class="catbg popup_heading"><button type="button" class="closebutton main_icons hide_popup"></button>' + icon + this.opt.heading + '</div><div class="popup_content">' + this.opt.content + '</div></div></div>');
 
 	// Show it
 	this.popup_body = $('#' + this.popup_id).children('.popup_window');
@@ -1649,16 +1649,14 @@ function updateActionDef(optNum)
 
 function makeToggle(el, text)
 {
-	var t = document.createElement("a");
-	t.href = 'javascript:void(0);';
+	var t = document.createElement("button");
 	t.textContent = text;
-	t.className = 'toggle_down';
-	createEventListener(t);
+	t.className = 'link-btn toggle_down';
 	t.addEventListener('click', function()
 	{
 		var d = this.nextSibling;
 		d.classList.toggle('hidden');
-		this.className = this.className == 'toggle_down' ? 'toggle_up' : 'toggle_down';
+		this.className = this.className == 'link-btn toggle_down' ? 'link-btn toggle_up' : 'link-btn toggle_down';
 	}, false);
 	el.classList.add('hidden');
 	el.parentNode.insertBefore(t, el);

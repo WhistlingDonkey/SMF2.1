@@ -57,7 +57,7 @@ function template_main()
 
 	echo '
 						</div>
-						<a href="javascript:void(0);" onclick="document.getElementById(\'known_themes_list\').classList.remove(\'hidden\'); document.getElementById(\'known_themes_link\').classList.add(\'hidden\'); return false; " id="known_themes_link" class="hidden">[ ', $txt['themeadmin_themelist_link'], ' ]</a>
+						<button type="button" class="link-btn hidden" onclick="document.getElementById(\'known_themes_list\').classList.remove(\'hidden\'); document.getElementById(\'known_themes_link\').classList.add(\'hidden\'); return false; " id="known_themes_link">[ ', $txt['themeadmin_themelist_link'], ' ]</button>
 						<script>
 							document.getElementById("known_themes_list").classList.add(\'hidden\');
 							document.getElementById("known_themes_link").classList.remove(\'hidden\');

@@ -4174,7 +4174,7 @@ function template_upgrade_options()
 					<li>
 						<input type="checkbox" name="maint" id="maint" value="1" checked>
 						<label for="maint">', $txt['upgrade_maintenance'], '</label>
-						<span class="smalltext">(<a href="javascript:void(0)" onclick="document.getElementById(\'mainmess\').classList.toggle(\'hidden\')">', $txt['upgrade_customize'], '</a>)</span>
+						<span class="smalltext">(<button type="button" class="link-btn" onclick="document.getElementById(\'mainmess\').classList.toggle(\'hidden\')">', $txt['upgrade_customize'], '</button>)</span>
 						<div id="mainmess" class="hidden">
 							<strong class="smalltext">', $txt['upgrade_maintenance_title'], ' </strong><br>
 							<input type="text" name="maintitle" size="30" value="', htmlspecialchars($mtitle), '"><br>

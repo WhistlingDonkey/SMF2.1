@@ -361,7 +361,7 @@ function template_main()
 	<div id="mobile_action" class="popup_container">
 		<div class="popup_window description">
 			<div class="popup_heading">', $txt['mobile_action'], '
-				<a href="javascript:void(0);" class="main_icons hide_popup"></a>
+				<button type="button" class="closebutton main_icons hide_popup"></button>
 			</div>
 			', template_button_strip($context['normal_buttons']), '
 		</div>

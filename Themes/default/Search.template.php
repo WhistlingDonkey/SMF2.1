@@ -149,7 +149,7 @@ function template_main()
 		{
 			echo '
 						<li>
-							<a href="javascript:void(0);" onclick="selectBoards([', implode(', ', $category['child_ids']), '], \'searchform\'); return false;">', $category['name'], '</a>
+							<button type="button" class="link-btn" onclick="selectBoards([', implode(', ', $category['child_ids']), '], \'searchform\'); return false;">', $category['name'], '</button>
 							<ul>';
 
 			$cat_boards = array_values($category['boards']);
